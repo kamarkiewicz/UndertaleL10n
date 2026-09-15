@@ -7,7 +7,7 @@ in a single `data.win`, selectable at runtime from Settings → Language.
 
 ## Chcę zagrać w Undertale po polsku (lub innym języku)
 
-Pobierz `data.win` z [release'a **Tłumaczenia**](../../releases/tag/translations),
+Pobierz `data.win` z [release'a **Multilingual**](../../releases/tag/multilingual),
 podmień nim plik o tej samej nazwie w folderze gry, a język wybierz w grze:
 Settings → Language.
 
@@ -105,7 +105,7 @@ fonts/                    Font sheets (PNG + CSV) with an extended character set
                           See fonts/README.md.
 
 .github/workflows/        CI: validates every locale/*.po on every push/PR, and builds+publishes
-                          a ready-to-use data.win to the "translations" GitHub Release whenever
+                          a ready-to-use data.win to the "multilingual" GitHub Release whenever
                           a translation changes on main (see the top of this README).
 
 build/                    Scratch space, gitignored EXCEPT `pristine.win` (tracked via Git LFS

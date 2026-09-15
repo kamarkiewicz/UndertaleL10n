@@ -2,7 +2,7 @@ name: Build data.win
 
 # Builds a data.win with every locale/<code>.po built in as a selectable
 # in-game language (Settings > Language), and publishes it as a downloadable
-# asset on the "translations" GitHub Release.
+# asset on the "multilingual" GitHub Release.
 
 on:
   push:
@@ -42,38 +42,62 @@ jobs:
             --scripts scripts/build_data.csx \
             -o data.win -f
 
-      - name: Publish/update the translations GitHub Release
+      - name: Publish/update the multilingual GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           GAME_VERSION=$(grep -oP '(?<=X-Game-Data-Version: )[^\\]+' locale/undertale.pot)
           GAME_SHA=$(grep -oP '(?<=X-Game-Data-SHA256: )[^\\]+' locale/undertale.pot)
-          LANGUAGES=$(python3 -c "
+
+          python3 - "$GAME_VERSION" "$GAME_SHA" > release_notes.md <<'PY'
           import sys
           sys.path.insert(0, 'scripts')
           from validate_po import get_header, LOCALE_DIR
-          print(', '.join(get_header(p)['X-Display-Name'] for p in sorted(LOCALE_DIR.glob('*.po'))))
-          ")
 
-          cat > release_notes.md <<EOF
-          Automatycznie zbudowany plik \`data.win\` z tłumaczeniami: **${LANGUAGES}**.
+          game_version, game_sha = sys.argv[1], sys.argv[2]
 
-          Języki są wbudowane w plik i przełączane w grze: Settings → Language
-          (strzałki lewo/prawo).
+          # Per-language install instructions. Add an entry here whenever a
+          # new locale/<code>.po is added; unknown codes get a generic
+          # English fallback so the release still builds without one.
+          INSTRUCTIONS = {
+              "pl": ("🇵🇱", "Polski",
+                     "pobierz `data.win` i podmień nim `Undertale/data.win` w "
+                     "folderze gry. Język wybierz w grze: Settings → Language "
+                     "(strzałki lewo/prawo)."),
+              "es": ("🇪🇸", "Español",
+                     "descarga `data.win` y reemplaza `Undertale/data.win` en la "
+                     "carpeta del juego. Elige idioma en el juego: Settings → "
+                     "Language (flechas izquierda/derecha)."),
+          }
 
-          **Zgodne z wersją gry:** \`${GAME_VERSION}\`
-          (SHA-256 oryginalnego data.win: \`${GAME_SHA}\`)
+          lines = [
+              f"Compatible with game version `{game_version}` "
+              f"(SHA-256: `{game_sha}`)",
+              "",
+              "🇬🇧 **English:** download `data.win` and replace "
+              "`Undertale/data.win` in your game folder. Switch language "
+              "in-game: Settings → Language (left/right arrows).",
+          ]
+          for po_path in sorted(LOCALE_DIR.glob("*.po")):
+              code = po_path.stem
+              display_name = get_header(po_path)["X-Display-Name"]
+              flag, label, text = INSTRUCTIONS.get(
+                  code,
+                  ("🌐", display_name,
+                   "download `data.win` and replace `Undertale/data.win` in "
+                   "your game folder. Switch language in-game: Settings → "
+                   "Language."),
+              )
+              lines.append("")
+              lines.append(f"{flag} **{label}:** {text}")
 
-          **Instalacja:**
-          1. Pobierz \`data.win\` poniżej.
-          2. Zrób kopię zapasową oryginalnego \`data.win\` z folderu gry (Undertale/data.win).
-          3. Podmień plik w folderze gry na pobrany.
-          EOF
+          print("\n".join(lines))
+          PY
 
-          gh release view translations >/dev/null 2>&1 || gh release create translations \
-            --title "Tłumaczenia" \
+          gh release view multilingual >/dev/null 2>&1 || gh release create multilingual \
+            --title "Multilingual" \
             --prerelease \
             --notes-file release_notes.md
 
-          gh release upload translations data.win --clobber
-          gh release edit translations --notes-file release_notes.md
+          gh release upload multilingual data.win --clobber
+          gh release edit multilingual --notes-file release_notes.md
