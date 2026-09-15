@@ -313,6 +313,9 @@ msgstr "   * Ucieknięto..."
 msgid "   * Fake Hit      * Recipe&   * Smile         * Clash"
 msgstr "   * Udawany Atak  * Przepis&   * Uśmiech       * Konflikt"
 
+msgid "   * Flee"
+msgstr "   * Uciekaj"
+
 #, fuzzy
 msgid "   * I'm outta here."
 msgstr "   * Nie ma mnie tu."
@@ -331,6 +334,9 @@ msgstr "   * Uciekłeś z \\[1] PD&     i \\[2] ZŁOTA."
 #, fuzzy
 msgid "   * Someone else"
 msgstr "   * Ktoś inny"
+
+msgid "   * Spare"
+msgstr "   * Oszczędź"
 
 #, fuzzy
 msgid "   * Struggle"
@@ -858,7 +864,7 @@ msgstr " NIE WIEM,& CZY CIĘ& WYPUSZCZĄ..."
 
 #, fuzzy
 msgid " I GUESS THIS MEANS& I HAVE TO GO ON A& DATE WITH YOU...?/%%"
-msgstr " CZYLI TO ZNACZY,& ŻE MUSZĘ IŚĆ Z TOBĄ& NA RANDKĘ...?/%%"
+msgstr " CZYLI TO ZNACZY,& ŻE MUSZĘ IŚĆ Z& TOBĄ NA RANDKĘ...?/%%"
 
 #, fuzzy
 msgid " I HOPE YOU& ENJOYED THIS& LESSON./"
