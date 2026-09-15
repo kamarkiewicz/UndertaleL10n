@@ -1,0 +1,76 @@
+name: Build data.win
+
+# Builds a ready-to-use, patched data.win (pristine game data + current
+# locale/pl_PL.po + fonts/) and publishes it as a downloadable asset on the
+# "polish-release" GitHub Release.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "locale/pl_PL.po"
+      - "fonts/**"
+      - "scripts/apply_locale.csx"
+      - "scripts/lib/PoFile.csx"
+      - "build/pristine.win"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (with LFS)
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Download UndertaleModCli (nightly, Linux)
+        run: |
+          curl -sL -o cli.zip \
+            "https://github.com/UnderminersTeam/UndertaleModTool/releases/download/nightly/CLI-ubuntu-latest-Debug-isBundled-true.zip"
+          mkdir -p UndertaleModCli
+          unzip -q cli.zip -d UndertaleModCli
+          chmod +x UndertaleModCli/UndertaleModCli
+          rm cli.zip
+
+      - name: Apply pl_PL locale to a fresh copy of pristine.win
+        run: |
+          UTLOC_LOCALE=pl_PL UndertaleModCli/UndertaleModCli load build/pristine.win \
+            --scripts scripts/apply_locale.csx \
+            -o data.win -f
+
+      - name: Publish/update the polish-release GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          GAME_VERSION=$(grep -oP '(?<=X-Game-Data-Version: )[^\\]+' locale/undertale.pot)
+          GAME_SHA=$(grep -oP '(?<=X-Game-Data-SHA256: )[^\\]+' locale/undertale.pot)
+
+          cat > release_notes.md <<EOF
+          Automatycznie zbudowany plik \`data.win\` z aktualnym polskim
+          tłumaczeniem (z \`locale/pl_PL.po\`, commit \`${GITHUB_SHA::7}\`).
+
+          **Tłumaczenie zgodne z wersją gry:** \`${GAME_VERSION}\`
+          (SHA-256 oryginalnego data.win: \`${GAME_SHA}\`)
+
+          **Instalacja:**
+          1. Pobierz \`data.win\` poniżej.
+          2. Zrób kopię zapasową oryginalnego \`data.win\` z folderu gry
+             (Undertale/data.win).
+          3. Podmień plik w folderze gry na pobrany.
+
+          Tłumaczenie w trakcie tworzenia — część tekstów wciąż jest po
+          angielsku (fallback zamiast błędu). Szczegóły i status w głównym
+          [README](https://github.com/${GITHUB_REPOSITORY}#readme).
+          EOF
+
+          gh release view polish-release >/dev/null 2>&1 || gh release create polish-release \
+            --title "Tłumaczenie PL" \
+            --prerelease \
+            --notes-file release_notes.md
+
+          gh release upload polish-release data.win --clobber
+          gh release edit polish-release --notes-file release_notes.md

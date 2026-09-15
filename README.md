@@ -1,9 +1,14 @@
-# UndertaleL10n — Polish localization of Undertale
+# Undertale Localization Project
 
 Translation in the standard gettext PO format (`locale/pl_PL.po`), applied
 to `data.win` by `.csx` scripts run through `UndertaleModCli`.
 
-## Architecture, in short
+## Chcę zagrać w Undertale po polsku
+
+Pobierz `data.win` z [release'a **Tłumaczenie PL**](../../releases/tag/polish-release)
+i podmień nim plik o tej samej nazwie w folderze gry.
+
+## Architecture
 
 - **The tooling is C#/.NET (`UndertaleModCli` + `UndertaleModLib`)**, because
   the `data.win` format uses raw, absolute pointers to strings/assets
@@ -23,8 +28,9 @@ to `data.win` by `.csx` scripts run through `UndertaleModCli`.
 
 ## Setup
 
-`UndertaleModCli/` and `build/` are in `.gitignore` — they are not part of
-the repo.
+`UndertaleModCli/` is in `.gitignore` and not part of the repo. `build/` is
+gitignored too, except `build/pristine.win`, which is tracked via Git LFS
+(see the "Directory layout" section below).
 
 1. Download the nightly `UndertaleModCli` build for your system:
    https://github.com/UnderminersTeam/UndertaleModTool/releases/tag/nightly
@@ -64,6 +70,8 @@ scripts/                  Our tooling.
   extract_pot.csx           Dumps ALL unique strings from a given data.win into a .pot (template).
   apply_locale.csx          Applies locale/<code>.po + fonts/ (shared) onto the in-memory Data.
   check_fonts.csx           Diagnostics: which characters are missing from which font.
+  validate_po.py            Sanity-checks pl_PL.po against undertale.pot (dupes, broken fuzzy
+                            entries). Run manually or via CI, see .github/workflows/.
   extract_strg_emergency.py EXCEPTION to "pure C#" — see the section below for when to use it.
 
 locale/                   See locale/README.md.
@@ -74,10 +82,15 @@ fonts/                    Font sheets (PNG + CSV) with an extended character set
                           shared by ALL locales (not just pl).
                           See fonts/README.md.
 
-build/                    Scratch space, gitignored. Working/test files can be cleared
-                          at any time, EXCEPT `pristine.win` (the only local copy of a
-                          clean, original data.win — without it you'd have to make one
-                          again from a not-yet-localized copy of the game).
+.github/workflows/        CI: validates pl_PL.po on every push/PR, and builds+publishes a
+                          ready-to-use data.win to the "polish-release" GitHub Release whenever
+                          the translation changes on main (see the top of this README).
+
+build/                    Scratch space, gitignored EXCEPT `pristine.win` (tracked via Git LFS
+                          — the only copy of a clean, original data.win; CI needs it to build
+                          releases, and without it locally you'd have to make one again from a
+                          not-yet-localized copy of the game). Everything else here (dumps,
+                          backups, working `.win` files) can be cleared at any time.
 ```
 
 ## Workflow: adding/fixing a translation
