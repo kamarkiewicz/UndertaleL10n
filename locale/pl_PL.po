@@ -402,7 +402,7 @@ msgstr "  A teraz,&  światło słońca&  jest w zasięgu&  naszych rąk!"
 
 #, fuzzy
 msgid "  And you're NEVER&  waking up!^3 %%"
-msgstr "  Z ktvrego NIGDY&  siq nie zbudzisz!^3 %%"
+msgstr "  Z którego NIGDY&  się nie zbudzisz!^3 %%"
 
 #, fuzzy
 msgid "  Anyone else&  would be DEAD&  by now!"
@@ -546,7 +546,7 @@ msgstr " To wszystko jest& tylko złym snem...!/"
 
 #, fuzzy
 msgid "  This is all just&  a bad dream...^4 %%"
-msgstr "  To wszystko jest&  tylko z@ym snem...^4 %%"
+msgstr "  To wszystko jest&  tylko złym snem...^4 %%"
 
 #, fuzzy
 msgid "  Wake up^1!&  It's not over!/%%"
@@ -1550,7 +1550,7 @@ msgstr "(ODKRYJESZ MOJĄ&SEKRETNĄ PERSONĘ&ONLINE!)/%%"
 
 #, fuzzy
 msgid "(You called for help.^4) %%"
-msgstr "(Zawo@a@ex o pomoc.^4) %%"
+msgstr "(Zawołałeś o pomoc.^4) %%"
 
 #, fuzzy
 msgid "(agg-&ressive&tooting)"
@@ -5370,7 +5370,7 @@ msgstr "* Bawi się...^2 ŁOPATKAMI!/"
 
 #, fuzzy
 msgid "* ... So even if you&  ARE a sicko^1, I'll&  take it!/%%"
-msgstr "* ... Wiqc nawet jexli&  jestex chory na&  umyxle^1, nie mam nic&  przeciwko!/%%"
+msgstr "* ... Więc nawet jeśli&  jesteś chory na&  umyśle^1, nie mam nic&  przeciwko!/%%"
 
 #, fuzzy
 msgid "* ... TOUCHED ME!/"
@@ -5546,7 +5546,7 @@ msgstr "* ... gapiła się we mnie swoim&  przerażającym wzrokiem&  i lizała 
 
 #, fuzzy
 msgid "* ... killing you only&  ONE time?/%%"
-msgstr "* ... z zabicia ciq&  tylko RAZ?/%%"
+msgstr "* ... z zabicia cię&  tylko RAZ?/%%"
 
 #, fuzzy
 msgid "* ... knowing she was gonna&  beat me up^1!&* Ha ha./%%"
@@ -6714,7 +6714,7 @@ msgstr "* Jest już okej między nami!?."
 
 #, fuzzy
 msgid "* Are you REALLY that&  desperate...^1?&* Hee hee hee.../%%"
-msgstr "* Naprawdq jestex a4&  TAK beznadziejny...^1?&* Hi hi hi.../%%"
+msgstr "* Naprawdę jesteś aż&  TAK beznadziejny...^1?&* Hi hi hi.../%%"
 
 #, fuzzy
 msgid "* Are you a star?/%%"
@@ -6734,7 +6734,7 @@ msgstr "* Trzymasz to tylko po to,&  by wyglądać na kogoś&  wyrafinowanego?/"
 
 #, fuzzy
 msgid "* Are you letting me&  kill you..^1.&* ... on PURPOSE^2?&* SICKO^1. Ha ha ha./%%"
-msgstr "* Dajesz mi siq zabi<..^1.&* ... CELOWO^2?&* TY CHORY CZ>OWIEKU^1.&* Ha ha ha./%%"
+msgstr "* Dajesz mi się zabić..^1.&* ... CELOWO^2?&* TY CHORY CZŁOWIEKU^1.&* Ha ha ha./%%"
 
 #, fuzzy
 msgid "* Are you ready?/"
@@ -7958,7 +7958,7 @@ msgstr "* Czy coś się ruszyło^1?&* Czy to moja wyobraźnia?/"
 
 #, fuzzy
 msgid "* Did you REALLY&  think.../"
-msgstr "* Czy ty SERIO&  myxla@ex.../"
+msgstr "* Czy ty SERIO&  myślałeś.../"
 
 #, fuzzy
 msgid "* Did you enjoy your stay?/"
@@ -7990,7 +7990,7 @@ msgstr "* Nie zauważyłeś?&* Wyprzedaż Pajęczych Wypieków&  w dół i w pra
 
 #, fuzzy
 msgid "* Did you really think&  I was gonna be&  satisfied.../"
-msgstr "* Serio myxla@ex,&  4e bqdq&  zadowolony.../"
+msgstr "* Serio myślałeś,&  że będę&  zadowolony.../"
 
 #, fuzzy
 msgid "* Did you want to&  hear about the&  book I am reading?/"
@@ -8062,7 +8062,7 @@ msgstr "* Czy właśnie nazwałeś ją&  swoją SPOKODOŁĄ!?/"
 
 #, fuzzy
 msgid "* Do you even realize&  what will happen if&  you defeat me...?/%%"
-msgstr "* Czy ty nie wiesz&  co siq stanie, gdy&  mnie pokonasz...?/%%"
+msgstr "* Czy ty nie wiesz&  co się stanie, gdy&  mnie pokonasz...?/%%"
 
 #, fuzzy
 msgid "* Do you have a&  monologue for&  EVERYTHING?/%%"
@@ -8714,7 +8714,7 @@ msgstr "* Kwiatuś uciekł."
 
 #, fuzzy
 msgid "* Flowey's DEFENSE&  dropped to 0^4! %%"
-msgstr "* DEFENSYWA&  Kwiatusia&  spad@a do 0^4! %%"
+msgstr "* DEFENSYWA&  Kwiatusia&  spadła do 0^4! %%"
 
 #, fuzzy
 msgid "* For a long time^1,&  I f-felt like a&   total screw-up./"
@@ -9554,7 +9554,7 @@ msgstr "* Hi hi hi./"
 
 #, fuzzy
 msgid "* Hee hee hee^1.&* Did you really think&  you could run away?/%%"
-msgstr "* Hi hi hi^1.&* Serio myxla@ex, 4e&  mo4esz sobie uciec?/%%"
+msgstr "* Hi hi hi^1.&* Serio myślałeś, że&  możesz sobie uciec?/%%"
 
 #, fuzzy
 msgid "* Heh..^1. us teens live&  self-sufficiently off&  the fat of the land.../"
@@ -9978,7 +9978,7 @@ msgstr "* Hmmm^1?&* Gdzie twój kolega?/%%"
 
 #, fuzzy
 msgid "* Honestly^1, fighting&  you IS pretty fun.../"
-msgstr "* Tak szczerze^1, walka&  z tobQ JEST dosy<&  zabawna.../"
+msgstr "* Tak szczerze^1, walka&  z tobą JEST dosyć&  zabawna.../"
 
 #, fuzzy
 msgid "* Honestly^1, she's a dork^1.&* And she's obsessed with&  these awful cartoons./"
@@ -13066,7 +13066,7 @@ msgstr "* Może to był zwykły&  strach./"
 
 #, fuzzy
 msgid "* Maybe you're wondering&  if I ever get tired&  of winning.../"
-msgstr "* Pewnie zastanawiasz&  siq, czy kiedyx&  znudzi mi siq&  wygrywanie.../"
+msgstr "* Pewnie zastanawiasz&  się, czy kiedyś&  znudzi mi się&  wygrywanie.../"
 
 #, fuzzy
 msgid "* Maybe^1, with what little&  power you have.../"
@@ -14562,7 +14562,7 @@ msgstr "* Impreza jak w Piekle."
 
 #, fuzzy
 msgid "* Pathetic..^1.&* Now you're REALLY&  gonna die!/%%"
-msgstr "* 2a@osne..^1.&* Teraz SERIO umrzesz!/%%"
+msgstr "* Żałosne..^1.&* Teraz SERIO umrzesz!/%%"
 
 #, fuzzy
 msgid "* People like you are so&  rare.../"
@@ -15114,7 +15114,7 @@ msgstr "* WCIĄŻ ZACIEKAWIONY TĄ&  MIKROFALĄ, TAK, SKARBIE?/"
 
 #, fuzzy
 msgid "* STOP!!^1!&  STOP IT!!!!^4! %%"
-msgstr "* PRZESTA5CIE!!^1!&  STOP!!!!^4! %%"
+msgstr "* PRZESTAŃCIE!!^1!&  STOP!!!!^4! %%"
 
 #, fuzzy
 msgid "* Same.../"
@@ -17346,7 +17346,7 @@ msgstr "* W tych akcyjnościach kompletnie&  brak SZTUKI^1, bezmyślne śmieci^1
 
 #, fuzzy
 msgid "* There's no such thing&  as happy endings./"
-msgstr "* Szczqxliwe zako6czenia&  nie istniejQ./"
+msgstr "* Szczęśliwe zakończenia&  nie istnieją./"
 
 #, fuzzy
 msgid "* There's normally a&  pair of old shoes&  in that seagrass./"
@@ -17546,7 +17546,7 @@ msgstr "* Pomyśl o tych imionach./"
 
 #, fuzzy
 msgid "* This CAN'T be&  happening!!!/"
-msgstr "* To NIE MO2E&  siq dzia<!!!/"
+msgstr "* To NIE MOŻE&  się dziać!!!/"
 
 #, fuzzy
 msgid "* This allows monsters to&  absorb the souls of&  humans.../"
@@ -17594,7 +17594,7 @@ msgstr "* To duży problem..^1.&* I o to chodzi^1! MUSZĄ odwołać&  szkołę z
 
 #, fuzzy
 msgid "* This is all that's&  left...!/%%"
-msgstr "* To jest jedyne,&  co pozosta@o...!/%%"
+msgstr "* To jest jedyne,&  co pozostało...!/%%"
 
 #, fuzzy
 msgid "* This is an Echo Flower^1.&* It repeats the last thing&  it heard^1, over and over.../%%"
@@ -18650,7 +18650,7 @@ msgstr "* Obudź się!/"
 
 #, fuzzy
 msgid "* Wanna see my answer?/%%"
-msgstr "* Chcesz zobaczy<&  mojQ odpowied8?/%%"
+msgstr "* Chcesz zobaczyć&  moją odpowiedź?/%%"
 
 #, fuzzy
 msgid "* Warning:&  Dog Marriage/%%"
@@ -19018,7 +19018,7 @@ msgstr "* Może tak coś, co nie jest&  ani potworem, ani człowiekiem?/%%"
 
 #, fuzzy
 msgid "* What are they&  doing^5? %%"
-msgstr "* Co one robiQ^5? %%"
+msgstr "* Co one robią^5? %%"
 
 #, fuzzy
 msgid "* What are you doing with&  all of that water?/%%"
@@ -19342,7 +19342,7 @@ msgstr "* Skąd te stoliki się&  biorą?/%%"
 
 #, fuzzy
 msgid "* Where are my&  powers!^5? %%"
-msgstr "* Gdzie sQ&  moje moce!^5? %%"
+msgstr "* Gdzie są&  moje moce!^5? %%"
 
 #, fuzzy
 msgid "* Where are you...?/"
@@ -19801,7 +19801,7 @@ msgstr "* NIE JESTEŚ ZAGROŻENIEM&  TYLKO DLA POTWORÓW..^1.&* ALE TEŻ DLA LUD
 
 #, fuzzy
 msgid "* YOU'RE SUPPOSED&  TO OBEY ME!^4! %"
-msgstr "* POWINNIXCIE&  MI ULEC!^4! %"
+msgstr "* POWINNIŚCIE&  MI ULEC!^4! %"
 
 #, fuzzy
 msgid "* YOU'RE THE GUEST!^1!&* SIT DOWN AND ENJOY&  YOURSELF!!!/"
@@ -20341,7 +20341,7 @@ msgstr "* Myślisz, że to jakieś&  przedstawienie?/^"
 
 #, fuzzy
 msgid "* You called for help..."
-msgstr "* Zawo@a@ex o pomoc..."
+msgstr "* Zawołałeś o pomoc..."
 
 #, fuzzy
 msgid "* You called for help^1.&* But nobody came./^"
@@ -20461,7 +20461,7 @@ msgstr "* Możesz spytać ją o jej&  ulubioną książkę.../"
 
 #, fuzzy
 msgid "* You could&  defeat ME!?/"
-msgstr "* 2e możesz&  pokona<&  MNIE!?/"
+msgstr "* Że możesz&  pokonać&  MNIE!?/"
 
 #, fuzzy
 msgid "* You couldn't even&  get one bomb...!?/%%"
@@ -21989,7 +21989,7 @@ msgstr "* Nigdy nie będziesz&  w stanie nas pokonać.../"
 
 #, fuzzy
 msgid "* You're HOPELESS./"
-msgstr "* Jestex zupe@nie&  BEZNADZIEJNY./"
+msgstr "* Jesteś zupełnie&  BEZNADZIEJNY./"
 
 #, fuzzy
 msgid "* You're at Alphys's&  lab^1?&* Is she there...?/"
@@ -25563,7 +25563,7 @@ msgstr "ZAŚ DZWONISZ...?/%%"
 
 #, fuzzy
 msgid "CALM"
-msgstr "SPOK1J"
+msgstr "SPOKÓJ"
 
 #, fuzzy
 msgid "CAN SHE TRULY&BE BLAMED?/%%"
@@ -25677,7 +25677,7 @@ msgstr "DOKŁADNIE./"
 
 #, fuzzy
 msgid "CORRUPT"
-msgstr "FA>SZ"
+msgstr "FAŁSZ"
 
 #, fuzzy
 msgid "COVERS ITSELF&WITH A BLANKET^1,&AND SLEEPS.../%%"
@@ -25697,7 +25697,7 @@ msgstr "KRYTYCZNY CIOS!"
 
 #, fuzzy
 msgid "CRUELTY"
-msgstr "OKRUCIE5STWO"
+msgstr "OKRUCIEŃSTWO"
 
 #, fuzzy
 msgid "CURSES!!!/%%"
@@ -25918,7 +25918,7 @@ msgstr "MOC RANDKI"
 
 #, fuzzy
 msgid "DEATH"
-msgstr "XMIER$"
+msgstr "ŚMIERĆ"
 
 #, fuzzy
 msgid "DESPAIR"
@@ -26033,7 +26033,7 @@ msgstr "NIE ROZUMIESZ CZYM&JEST GRA AKTORSKA!?^3 %%"
 
 #, fuzzy
 msgid "DOOM"
-msgstr "ZAG>ADA"
+msgstr "ZAGŁADA"
 
 #, fuzzy
 msgid "DR. ALPHYS HAS&A CRUSH ON.../"
@@ -26742,7 +26742,7 @@ msgstr "NA SZCZĘŚCIE^1, &JEST TU NAPISANE&BY TYLKO SPYTAĆ!!!/"
 
 #, fuzzy
 msgid "FREEDOM"
-msgstr "WOLNOX$"
+msgstr "WOLNOŚĆ"
 
 #, fuzzy
 msgid "FRI"
@@ -26882,7 +26882,7 @@ msgstr "Flirtuj"
 
 #, fuzzy
 msgid "Flowey"
-msgstr "Kwiatux"
+msgstr "Kwiatuś"
 
 #, fuzzy
 msgid "Floweytale"
@@ -27308,7 +27308,7 @@ msgstr "STÓJ^1, CZŁOWIEKU!/%%"
 
 #, fuzzy
 msgid "HAPPINESS"
-msgstr "RADOX$"
+msgstr "RADOŚĆ"
 
 #, fuzzy
 msgid "HAPPSTABLOOK^1,&THE HAPPY&GHOST./"
@@ -27324,7 +27324,7 @@ msgstr "DIALOG Z CZAPKĄ./%%"
 
 #, fuzzy
 msgid "HATRED"
-msgstr "NIENAWIX$"
+msgstr "NIENAWIŚĆ"
 
 #, fuzzy
 msgid "HAVE A COOL&SKELETON ON IT?/"
@@ -30283,7 +30283,7 @@ msgstr "ZABICIE CIĘ&SAMODZIELNIE!!/%%"
 
 #, fuzzy
 msgid "KINDNESS"
-msgstr "2YCZLIWOX$"
+msgstr "ŻYCZLIWOŚĆ"
 
 #, fuzzy
 msgid "KNIGHT KNIGHT"
@@ -30426,7 +30426,7 @@ msgstr "SŁUCHAJ, SKARBIE.&WIDZIAŁEM, JAK&WALCZYSZ./"
 
 #, fuzzy
 msgid "LOAD FAILED"
-msgstr "B>AD ODCZYTU"
+msgstr "BŁAD ODCZYTU"
 
 #, fuzzy
 msgid "LOCAL METTATON VERY RICH FAMOUS AND GORGEOUS ||    "
@@ -30446,11 +30446,11 @@ msgstr "WIELE MIESZKAŃCÓW&CHCE SIĘ PO PROSTU&PODDAĆ./"
 
 #, fuzzy
 msgid "LOVE"
-msgstr "MI>OX$"
+msgstr "MIŁOŚĆ"
 
 #, fuzzy
 msgid "LUCK"
-msgstr "SZCZ3XCIE"
+msgstr "SZCZĘŚCIE"
 
 #, fuzzy
 msgid "La la~&Just be&yourself~"
@@ -30644,9 +30644,11 @@ msgstr "Żyją Z Rodzinami,#Myślą O Patykach"
 msgid "Logo Design#Cutscene Artist#Overworld Artist+#Animator (Area 1,2,3)#Shop Artist (Area 2,3)#Tile Artist (Area 2)"
 msgstr "Projekt Loga#Przerywniki#Powierzchnia+#Animacje (Strefa 1,2,3)#Sklepy (Strefa 2,3)#Tekstury (Strefa 2)"
 
-#, fuzzy
 msgid "Long ago^1, two races&ruled over Earth^1:&HUMANS and MONSTERS. \\E1 ^1 %"
-msgstr "Dawno temu^1, dwie rasy&panowa@y nad ZiemiQ^1:&LUDZIE i POTWORY^5. \\E1 ^1 %"
+msgstr "Dawno temu^1, dwie rasy&panowały nad Ziemią^1:&LUDZIE i POTWORY. \\E1 ^1 %"
+
+msgid "Long ago^1, two races&ruled over Earth^1:&HUMANS and MONSTERS^6. \\E1 ^1 %"
+msgstr "Dawno temu^1, dwie rasy&panowały nad Ziemią^1:&LUDZIE i POTWORY^6. \\E1 ^1 %"
 
 #, fuzzy
 msgid "Look.&Watch.&Observe."
@@ -30722,7 +30724,7 @@ msgstr "PRZEMEDYTUJ&TEN OBRAZEK./%%"
 
 #, fuzzy
 msgid "MERCY"
-msgstr "LITOX$"
+msgstr "LITOŚĆ"
 
 #, fuzzy
 msgid "MIGOSP"
@@ -30766,7 +30768,7 @@ msgstr "MARKA MTT WCIĄŻ NA SZCZYCIE    ||    SZKOŁY ODWOŁANE Z POWODU REAKTY
 
 #, fuzzy
 msgid "MURDERER"
-msgstr "ZAB1JSTWO"
+msgstr "ZABÓJSTWO"
 
 #, fuzzy
 msgid "MY ADVICE HELPED^1!&IT REALLY HELPED&YOU!!/"
@@ -30993,7 +30995,7 @@ msgstr "Moja \"ludzka dusza.\"/"
 
 #, fuzzy
 msgid "My World"
-msgstr "Mvj Xwiat"
+msgstr "Mój Świat"
 
 #, fuzzy
 msgid "My body..^1.&It feels like it's&splitting apart./"
@@ -31928,7 +31930,10 @@ msgstr "Pewnego dnia^1, ma&przybyć zbawiciel&z niebios./"
 
 #, fuzzy
 msgid "One day^1, th^7ey all&disappeared without&a trace."
-msgstr "Pewnego dnia^1, w^7szyscy&znikqnli bez xladu."
+msgstr "Pewnego dnia^1, w^7szyscy&zniknęli bez śladu."
+
+msgid "One day^1, war broke&out between the two&races^6. \\E0 ^1 %"
+msgstr "Pewnego dnia^1, wybuchła&wojna pomiędzy dwiema&rasami^6. \\E0 ^1 %"
 
 #, fuzzy
 msgid "Only&Snowy&can do&that."
@@ -34250,7 +34255,7 @@ msgstr "DOTKNIĘTE NAPISY"
 
 #, fuzzy
 msgid "TRAPPED"
-msgstr "WI3ZIENIE"
+msgstr "WIĘZIENIE"
 
 #, fuzzy
 msgid "TREASURES LIKE&MUD^1, OR DIRT./%%"
@@ -36717,7 +36722,7 @@ msgstr "Jesteś zrujnowany&zdemoralizowanym&sentymentalizmem./"
 
 #, fuzzy
 msgid "You called for help..."
-msgstr "Zawo@a@ex o pomoc..."
+msgstr "Zawołałeś o pomoc..."
 
 #, fuzzy
 msgid "You can come back&here any time...&And, for no charge&at all.../"
@@ -36860,7 +36865,7 @@ msgstr "Nie&jesteś&Płatkiem."
 
 #, fuzzy
 msgid "You&called&for&help&..."
-msgstr "Zawo-&@a@ex&o&pomoc&..."
+msgstr "Zawo-&łałeś&o&pomoc&..."
 
 #, fuzzy
 msgid "You&dare&defy me?"
@@ -37220,7 +37225,7 @@ msgstr "\\E0* Ale wiedząc^1, głęboko^1,&  że moi przyjaciele&  mnie wspieraj
 
 #, fuzzy
 msgid "\\E0* But nobody came./"
-msgstr "\\E0* Lecz nikt nie&  przyszed@./"
+msgstr "\\E0* Lecz nikt nie&  przyszedł./"
 
 #, fuzzy
 msgid "\\E0* But now the barrier&  is gone./"
@@ -40480,7 +40485,7 @@ msgstr "\\E1* KOCHAJ GO MOCNIEJ!!!/%%"
 
 #, fuzzy
 msgid "\\E1* Call for help^1.&* I dare you./"
-msgstr "\\E1* Wo@aj o pomoc^1.&* Xmia@o./"
+msgstr "\\E1* Wołaj o pomoc^1.&* Śmiało./"
 
 #, fuzzy
 msgid "\\E1* Cause I'm gonna&  post it online!/%%"
@@ -47932,7 +47937,7 @@ msgstr "\\E5* Przerażające^1, co nie?/%%"
 
 #, fuzzy
 msgid "\\E5* Cry into the&  darkness!/"
-msgstr "\\E5* Krzycz i p@acz&  w ciemnox<!/"
+msgstr "\\E5* Krzycz i płacz&  w ciemności!/"
 
 #, fuzzy
 msgid "\\E5* Did YOU write this&  letter?/"
@@ -47992,7 +47997,7 @@ msgstr "\\E5* Że co^1?&* Ta^1, te dwie handlarki^1.&* Dziewuszki./"
 
 #, fuzzy
 msgid "\\E5* I am the GOD of&  this world./"
-msgstr "\\E5* Jestem BOGIEM&  tego xwiata./"
+msgstr "\\E5* Jestem BOGIEM&  tego świata./"
 
 #, fuzzy
 msgid "\\E5* I am the prince of&  this world's future./"
@@ -48832,7 +48837,7 @@ msgstr "\\E6* Wpadaj kiedy chcesz^1, mały&  gościu./%%"
 
 #, fuzzy
 msgid "\\E6* Anyway^1, YOU!/"
-msgstr "\\E6* Niewa4ne^1, TY!/"
+msgstr "\\E6* Nieważne^1, TY!/"
 
 #, fuzzy
 msgid "\\E6* Anyways^1, I won't sweat it^1,&  little buddy^1.&* I'll take it casual./"
@@ -50624,7 +50629,7 @@ msgstr "\\E7Wolisz tu pozostać&i cierpieć.../"
 
 #, fuzzy
 msgid "\\E8\"Mommy^1! Daddy^1!\"&\"Somebody help!\"/"
-msgstr "\\E8\"Mamo^1! Tato^1!\"&\"Niech ktox pomo4e!\"/"
+msgstr "\\E8\"Mamo^1! Tato^1!\"&\"Niech ktoś pomoże!\"/"
 
 #, fuzzy
 msgid "\\E8(They think my art&is terrible.)/"
@@ -50632,7 +50637,7 @@ msgstr "\\E8(Pewnie myśli, że&moja sztuka jest&do niczego.)/"
 
 #, fuzzy
 msgid "\\E8* ... can't save&  you now./"
-msgstr "\\E8* ... nie mogQ&  ci teraz pomvc./"
+msgstr "\\E8* ... nie mogą&  ci teraz pomóc./"
 
 #, fuzzy
 msgid "\\E8* ... everything I'd done&  so far had been such&  a horrific failure./"
