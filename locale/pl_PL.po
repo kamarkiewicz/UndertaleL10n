@@ -26365,7 +26365,7 @@ msgid "EMPTY"
 msgstr "PUSTE"
 
 msgid "ENGLISH"
-msgstr "ANGIELSKI"
+msgstr "POLSKI"
 
 #, fuzzy
 msgid "ENJOY AND TAKE&YOUR TIME!!!/%%"
