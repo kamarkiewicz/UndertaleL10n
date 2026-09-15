@@ -5,11 +5,19 @@ per language), compiled directly into the game's own built-in multi-language
 system by `.csx` scripts run through `UndertaleModCli`. All languages ship
 in a single `data.win`, selectable at runtime from Settings → Language.
 
-## Chcę zagrać w Undertale po polsku (lub innym języku)
+## I want to play Undertale translated
 
-Pobierz `data.win` z [release'a **Multilingual**](../../releases/tag/multilingual),
-podmień nim plik o tej samej nazwie w folderze gry, a język wybierz w grze:
-Settings → Language.
+Download `data.win` from the [**Multilingual** release](../../releases/tag/multilingual)
+(install instructions for every language are on the release page).
+
+| Language | Coverage | Credits |
+| --- | --- | --- |
+| 🇵🇱 Polski | 95.1% | Krzyhau |
+| 🇪🇸 Español | 95.9% | [Undertale-Spanish (UTES) v1.1](https://undertale-spanish.com/) |
+
+Coverage is against `locale/undertale.pot`, i.e. the text the game's own
+translation system can reach — see "Known limitations" below for text it
+can't.
 
 ## Architecture
 
@@ -40,6 +48,25 @@ Settings → Language.
 - **Translations use the real `.po` format** (gettext), not ad-hoc JSON —
   editable in Poedit/Lokalize, with support for `#, fuzzy` (needs review)
   and comments.
+
+## Known limitations
+
+Not every piece of in-game text goes through `scr_gettext` — some is
+written directly into other objects' GML as a plain string literal (e.g.
+the `LV`/`HP`/`G` stat labels, the name-picking screen, some dialogue).
+That text isn't in `gml_Script_textdata_en`, so it's not in
+`locale/undertale.pot` either, and no `.po` translation can currently
+reach it — `scripts/validate_po.py` reports translated entries for such
+text as "stale" (present in the `.po`, absent from the `.pot`) since
+they don't correspond to any translatable key.
+
+`pl.po`/`es.po` both carry translations for a good chunk of this
+(inherited from before this project's architecture switched to the
+game's native multi-language system), but `scripts/build_data.csx`
+currently has no way to apply them — reaching this text would mean
+rewriting the GML at each place it's referenced to call `scr_gettext`
+instead, which hasn't been done. It'll show up in English regardless of
+the selected language until that's tackled.
 
 ## Setup
 
