@@ -50,7 +50,7 @@ jobs:
           GAME_SHA=$(grep -oP '(?<=X-Game-Data-SHA256: )[^\\]+' locale/undertale.pot)
 
           cat > release_notes.md <<EOF
-          Automatycznie zbudowany plik \`data.win\` z aktualnym polskim tłumaczeniem (z \`locale/pl_PL.po\`, commit \`${GITHUB_SHA::7}\`).
+          Automatycznie zbudowany plik \`data.win\` z aktualnym polskim tłumaczeniem (z \`locale/pl_PL.po\`).
 
           **Tłumaczenie zgodne z wersją gry:** \`${GAME_VERSION}\`
           (SHA-256 oryginalnego data.win: \`${GAME_SHA}\`)
