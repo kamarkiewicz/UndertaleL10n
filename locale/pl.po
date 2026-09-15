@@ -4,6 +4,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Display-Name: POLSKI\n"
 
 #, fuzzy
 msgid "                              &   Eat it          Refuse   &                            "

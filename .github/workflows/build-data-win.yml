@@ -1,17 +1,17 @@
 name: Build data.win
 
-# Builds a ready-to-use, patched data.win (pristine game data + current
-# locale/pl_PL.po + fonts/) and publishes it as a downloadable asset on the
-# "polish-release" GitHub Release.
+# Builds a data.win with every locale/<code>.po built in as a selectable
+# in-game language (Settings > Language), and publishes it as a downloadable
+# asset on the "translations" GitHub Release.
 
 on:
   push:
     branches: [main]
     paths:
-      - "locale/pl_PL.po"
+      - "locale/*.po"
       - "fonts/**"
-      - "scripts/apply_locale.csx"
-      - "scripts/lib/PoFile.csx"
+      - "scripts/build_data.csx"
+      - "scripts/lib/*.csx"
       - "build/pristine.win"
   workflow_dispatch:
 
@@ -36,23 +36,32 @@ jobs:
           chmod +x UndertaleModCli/UndertaleModCli
           rm cli.zip
 
-      - name: Apply pl_PL locale to a fresh copy of pristine.win
+      - name: Build data.win with every registered locale
         run: |
-          UTLOC_LOCALE=pl_PL UndertaleModCli/UndertaleModCli load build/pristine.win \
-            --scripts scripts/apply_locale.csx \
+          UndertaleModCli/UndertaleModCli load build/pristine.win \
+            --scripts scripts/build_data.csx \
             -o data.win -f
 
-      - name: Publish/update the polish-release GitHub Release
+      - name: Publish/update the translations GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           GAME_VERSION=$(grep -oP '(?<=X-Game-Data-Version: )[^\\]+' locale/undertale.pot)
           GAME_SHA=$(grep -oP '(?<=X-Game-Data-SHA256: )[^\\]+' locale/undertale.pot)
+          LANGUAGES=$(python3 -c "
+          import sys
+          sys.path.insert(0, 'scripts')
+          from validate_po import get_header, LOCALE_DIR
+          print(', '.join(get_header(p)['X-Display-Name'] for p in sorted(LOCALE_DIR.glob('*.po'))))
+          ")
 
           cat > release_notes.md <<EOF
-          Automatycznie zbudowany plik \`data.win\` z aktualnym polskim tłumaczeniem (z \`locale/pl_PL.po\`).
+          Automatycznie zbudowany plik \`data.win\` z tłumaczeniami: **${LANGUAGES}**.
 
-          **Tłumaczenie zgodne z wersją gry:** \`${GAME_VERSION}\`
+          Języki są wbudowane w plik i przełączane w grze: Settings → Language
+          (strzałki lewo/prawo).
+
+          **Zgodne z wersją gry:** \`${GAME_VERSION}\`
           (SHA-256 oryginalnego data.win: \`${GAME_SHA}\`)
 
           **Instalacja:**
@@ -61,10 +70,10 @@ jobs:
           3. Podmień plik w folderze gry na pobrany.
           EOF
 
-          gh release view polish-release >/dev/null 2>&1 || gh release create polish-release \
-            --title "Tłumaczenie PL" \
+          gh release view translations >/dev/null 2>&1 || gh release create translations \
+            --title "Tłumaczenia" \
             --prerelease \
             --notes-file release_notes.md
 
-          gh release upload polish-release data.win --clobber
-          gh release edit polish-release --notes-file release_notes.md
+          gh release upload translations data.win --clobber
+          gh release edit translations --notes-file release_notes.md

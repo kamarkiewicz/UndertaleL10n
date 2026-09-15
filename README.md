@@ -1,23 +1,38 @@
 # Undertale Localization Project
 
-Translation in the standard gettext PO format (`locale/pl_PL.po`), applied
-to `data.win` by `.csx` scripts run through `UndertaleModCli`.
+Translations in the standard gettext PO format (`locale/<code>.po`, one
+per language), compiled directly into the game's own built-in multi-language
+system by `.csx` scripts run through `UndertaleModCli`. All languages ship
+in a single `data.win`, selectable at runtime from Settings → Language.
 
-## Chcę zagrać w Undertale po polsku
+## Chcę zagrać w Undertale po polsku (lub innym języku)
 
-Pobierz `data.win` z [release'a **Tłumaczenie PL**](../../releases/tag/polish-release)
-i podmień nim plik o tej samej nazwie w folderze gry.
+Pobierz `data.win` z [release'a **Tłumaczenia**](../../releases/tag/translations),
+podmień nim plik o tej samej nazwie w folderze gry, a język wybierz w grze:
+Settings → Language.
 
 ## Architecture
 
-- **The tooling is C#/.NET (`UndertaleModCli` + `UndertaleModLib`)**, because
-  the `data.win` format uses raw, absolute pointers to strings/assets
-  scattered across the whole file (bytecode, variable names, assets...).
-  Safely changing the LENGTH of a string (and Polish translations are almost
-  always longer than the English originals) requires fixing up all of those
-  pointers — exactly what `UndertaleModLib` does during a full
-  re-serialization of the file. Reimplementing that in plain Python would be
-  a large, risky project.
+- **Undertale (Steam) already ships English+Japanese via its own text
+  lookup system**: `scr_gettext(text_id)` reads `global.text_data_en`
+  (baseline) and, if `global.language != "en"`, overrides with
+  `global.text_data_<lang>` when that key exists there — missing keys
+  fall back to English automatically, so no translation needs 100%
+  coverage. Those tables are populated by GML scripts
+  (`gml_Script_textdata_en`, `_ja`, ...), each just thousands of
+  `ds_map_add(global.text_data_en, "key", "text");` lines. We compile one
+  such script per locale from its `.po` file, add its language code to
+  `global.lang_list`, and patch the Settings menu's language row (a plain
+  EN⇄JA toggle in vanilla) into generic array cycling. See
+  `scripts/lib/GmlText.csx` for exactly how this works, and its header
+  comment for what's *not* built into the base game (the array-cycling
+  menu, notably — that had to be added, not just extended).
+- **The tooling is C#/.NET (`UndertaleModCli` + `UndertaleModLib`)**, both
+  for that GML compilation (`UndertaleModLib.Compiler.CodeImportGroup`) and
+  because `data.win`'s raw, absolute pointers to strings/assets need
+  `UndertaleModLib`'s full re-serialization to stay consistent after any
+  edit. Reimplementing that in plain Python would be a large, risky
+  project.
 - **All the logic lives in `.csx` scripts** run via `UndertaleModCli load
   --scripts` — not a separate compiled project. `.csx` files run through the
   built-in Roslyn scripting host in `UndertaleModCli`, so no .NET SDK or
@@ -67,24 +82,31 @@ UndertaleModCli/          Downloaded UndertaleModCli build (see Setup). Not in g
 
 scripts/                  Our tooling.
   lib/PoFile.csx            Reader/writer for the .po format (msgid/msgstr, #, fuzzy, comments).
-  extract_pot.csx           Dumps ALL unique strings from a given data.win into a .pot (template).
-  apply_locale.csx          Applies locale/<code>.po + fonts/ (shared) onto the in-memory Data.
+  lib/GmlText.csx           Reads/writes GML string literals as they appear in the game's
+                            gml_Script_textdata_<lang> scripts (quote-style switching,
+                            + concatenation - GML can't escape its own delimiter quote).
+  extract_pot.csx           Decompiles gml_Script_textdata_en into a .pot (template) - every
+                            real, in-game, user-facing string (not a raw Data.Strings dump).
+  build_data.csx            Compiles every locale/<code>.po into the game's own multi-language
+                            system + applies fonts/ (shared). See "Architecture" above.
   check_fonts.csx           Diagnostics: which characters are missing from which font.
-  validate_po.py            Sanity-checks pl_PL.po against undertale.pot (dupes, broken fuzzy
-                            entries). Run manually or via CI, see .github/workflows/.
-  extract_strg_emergency.py EXCEPTION to "pure C#" — see the section below for when to use it.
+  validate_po.py            Sanity-checks every locale/<code>.po against undertale.pot (dupes,
+                            broken fuzzy entries, missing X-Display-Name header). Run manually
+                            or via CI, see .github/workflows/.
 
 locale/                   See locale/README.md.
-  undertale.pot             Template: all strings from the current game, in English, empty msgstr.
-  pl_PL.po                  The ACTUAL Polish translation. This is what you edit.
+  undertale.pot             Template: every translatable string in the current game, in
+                            English, empty msgstr.
+  <code>.po                 One file per language (e.g. pl.po, es.po). <code> is used directly
+                            as the in-game language code - see "Adding a new language" below.
 
 fonts/                    Font sheets (PNG + CSV) with an extended character set,
                           shared by ALL locales (not just pl).
                           See fonts/README.md.
 
-.github/workflows/        CI: validates pl_PL.po on every push/PR, and builds+publishes a
-                          ready-to-use data.win to the "polish-release" GitHub Release whenever
-                          the translation changes on main (see the top of this README).
+.github/workflows/        CI: validates every locale/*.po on every push/PR, and builds+publishes
+                          a ready-to-use data.win to the "translations" GitHub Release whenever
+                          a translation changes on main (see the top of this README).
 
 build/                    Scratch space, gitignored EXCEPT `pristine.win` (tracked via Git LFS
                           — the only copy of a clean, original data.win; CI needs it to build
@@ -95,80 +117,76 @@ build/                    Scratch space, gitignored EXCEPT `pristine.win` (track
 
 ## Workflow: adding/fixing a translation
 
-1. Open `locale/pl_PL.po` in Poedit / Lokalize / any text editor. Each entry
-   is `msgid "English original"` / `msgstr "Polish translation"`. Entries
-   marked `#, fuzzy` come from an automatic match against Krzyhau's old
-   2017 translation and haven't been individually verified against the
-   current version of the game — worth reviewing and clearing the `fuzzy`
-   flag once checked.
+1. Open `locale/<code>.po` (e.g. `locale/pl.po`) in Poedit / Lokalize / any
+   text editor. Each entry is `msgid "English original"` / `msgstr
+   "Translation"`. Entries marked `#, fuzzy` come from an automatic match
+   against an older imported translation and haven't been individually
+   verified against the current version of the game — worth reviewing and
+   clearing the `fuzzy` flag once checked.
 
-2. Looking for a specific piece of missing text from the game? Generate a
-   fresh `.pot` from the currently installed game and grep it:
-   ```bash
-   cp "$GAME/data.win" build/current.win   # local copy - a slow/networked FS can cause issues
-   UndertaleModCli/UndertaleModCli dump build/current.win -s -o build/dump
-   grep -n -i "text you're looking for" build/dump/strings.txt
-   ```
-   Note: if the currently installed game already has some translations from
-   `pl_PL.po` applied, the dump will show POLISH text for those, not
-   English — search `locale/undertale.pot` instead (always English) if
-   you're not sure whether a given string already has a PO entry.
+2. Looking for a specific piece of missing text? Grep `locale/undertale.pot`
+   (always English, deduplicated, one entry per real in-game string) —
+   regenerate it first if you suspect it's stale (see `locale/README.md`).
 
-3. Add/edit the entry in `locale/pl_PL.po` (the exact content of `msgid`
+3. Add/edit the entry in `locale/<code>.po` (the exact content of `msgid`
    must match the original, including `&`, `#`, `\[1]` etc. — these are the
    game's own formatting markers, not real newlines).
 
 4. Build and install (always on a copy, never overwrite the original
    without a backup). Keep backups in `build/`:
    ```bash
-   # Always build from the CLEAN original, NOT from an already-patched file —
-   # apply_locale.csx is not idempotent with respect to already-replaced strings
-   # (it won't reconstruct the original English text to re-match against the PO).
+   # Always build from the CLEAN original, NOT from an already-patched file.
    # Make build/pristine.win ONCE, right after installing/updating the game, before
    # any localized data.win overwrites it — then keep that copy in build/
    # and use it instead of $GAME/data.win (which may already be localized).
    # cp "$GAME/data.win" build/pristine.win
 
-   UTLOC_LOCALE=pl_PL UndertaleModCli/UndertaleModCli load build/pristine.win -v \
-     --scripts scripts/apply_locale.csx \
-     -o build/data_pl.win -f
+   UndertaleModCli/UndertaleModCli load build/pristine.win -v \
+     --scripts scripts/build_data.csx \
+     -o build/data_multi.win -f
 
-   cp "$GAME/data.win" "build/data_PL_backup_$(date +%Y%m%d_%H%M%S).win"
-   cp build/data_pl.win "$GAME/data.win"
-   md5 "$GAME/data.win" build/data_pl.win   # must match
+   cp "$GAME/data.win" "build/data_backup_$(date +%Y%m%d_%H%M%S).win"
+   cp build/data_multi.win "$GAME/data.win"
+   md5 "$GAME/data.win" build/data_multi.win   # must match
    ```
+   `build_data.csx` bundles **every** `locale/*.po` with translated content
+   into the one output file — in-game, pick the language from
+   Settings → Language.
 
-## When to use `extract_strg_emergency.py` (the only exception to pure C#)
+### Adding a new language
 
-Some old `data.win` files (e.g. very early GMS1.x versions) **fail to load
-fully** through `UndertaleModCli`/`UndertaleModLib` — they throw an
-exception while reading the FONT chunk (an old format incompatible with the
-current parser). This script works around the problem by reading the IFF
-container manually (tag+length+skip, skipping FONT without trying to
-understand it) and parsing the STRG chunk directly from raw bytes. The
-normal workflow (current game + `apply_locale.csx`) doesn't use it — it's
-kept around in case a similar problem shows up with another old file in the
-future.
-
-Non-obvious findings from this work, useful for a similar problem:
-- A pointer in the STRG table points AT the length field, not 4 bytes past
-  it.
-- In files with strings injected by tools that compute length before
-  converting to UTF-8, the declared length can be wrong — the true end of
-  the string is the NUL byte, not the declared length.
+Create `locale/<code>.po` with an `X-Display-Name` header (the label shown
+in the Settings menu — ALL CAPS to match the existing `ENGLISH`/`JAPANESE`
+labels), e.g.:
+```
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"X-Display-Name: FRANÇAIS\n"
+```
+`<code>` becomes the in-game language code directly (`global.language`,
+`gml_Script_textdata_<code>`) — use the code the game itself would use
+(2-letter, lowercase; e.g. `fr`, `de`). `scripts/build_data.csx` picks up
+any `locale/*.po` automatically, no separate registration needed. Make sure
+`fonts/` covers the language's characters (see `fonts/README.md`).
 
 ## `.po` format — conventions adopted in this project
 
 - `msgid` = the exact English text from the current (latest) version of the
   game.
-- Empty `msgstr` = untranslated; `apply_locale.csx` skips these (the
-  English stays, a safe fallback instead of breaking something).
-- `#, fuzzy` = needs review (bulk-imported from Krzyhau's old translation,
-  not verified against the current version of the game).
+- Empty `msgstr` = untranslated; `scripts/build_data.csx` simply doesn't
+  emit that key, and `scr_gettext`'s own runtime fallback to English
+  handles it — no special-casing needed on our end.
+- `#, fuzzy` = needs review (bulk-imported from an older translation, not
+  verified against the current version of the game).
+- The header must include `X-Display-Name`, ALL CAPS (the language's name
+  as shown in the in-game Settings menu, matching `ENGLISH`/`JAPANESE`,
+  e.g. `POLSKI`, `ESPAÑOL`) — see "Adding a new language" above.
+  `scripts/validate_po.py` fails if it's missing.
 - `msgid`/`msgstr` are deduplicated by content — if the same English text
   appears in multiple places in the game, it gets ONE shared translation.
   If two identical strings in different contexts ever need different
   translations, this format doesn't support that — it would require adding
   `msgctxt` (not yet supported by `PoFile.csx`).
 - No real use of `.mo` (the compiled binary form) — nothing here consumes
-  `.mo` at runtime, `apply_locale.csx` reads `.po` directly.
+  `.mo` at runtime, `build_data.csx` reads `.po` directly.

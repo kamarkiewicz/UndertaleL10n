@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Validates locale/pl_PL.po against locale/undertale.pot.
+"""Validates every locale/<code>.po against locale/undertale.pot.
 
-Checks:
+Checks, per .po:
   - duplicate msgids within either file (breaks PoFile.csx's dedup lookup)
   - entries flagged #, fuzzy with an empty msgstr (nothing to review)
-  - msgids present in pl_PL.po but absent from the current undertale.pot
+  - msgids present in the .po but absent from the current undertale.pot
     (stale/orphaned - warning only, since the .pot may simply predate a
     newer game build)
 
@@ -15,8 +15,8 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-POT_PATH = REPO_ROOT / "locale" / "undertale.pot"
-PO_PATH = REPO_ROOT / "locale" / "pl_PL.po"
+LOCALE_DIR = REPO_ROOT / "locale"
+POT_PATH = LOCALE_DIR / "undertale.pot"
 
 
 def unescape(s):
@@ -52,6 +52,28 @@ def extract_quoted(line):
     if first < 0 or last <= first:
         return None
     return unescape(line[first + 1 : last])
+
+
+def get_header(path):
+    """Returns the header key/value dict (the msgstr of the empty-msgid entry)."""
+    header = {}
+    in_header_msgstr = False
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            line = line.rstrip("\n\r").rstrip()
+            if line == 'msgid ""':
+                continue
+            if line == 'msgstr ""':
+                in_header_msgstr = True
+                continue
+            if in_header_msgstr and line.startswith('"'):
+                raw = extract_quoted(line) or ""
+                if ":" in raw:
+                    key, _, value = raw.partition(":")
+                    header[key.strip()] = value.strip()
+                continue
+            break
+    return header
 
 
 def parse_po(path):
@@ -112,27 +134,18 @@ def find_duplicates(entries):
     return {k: v for k, v in seen.items() if v > 1}
 
 
-def main():
-    if not POT_PATH.exists():
-        print(f"ERROR: {POT_PATH} not found (run scripts/extract_pot.csx).")
-        return 1
-    if not PO_PATH.exists():
-        print(f"ERROR: {PO_PATH} not found.")
-        return 1
-
-    pot_entries = parse_po(POT_PATH)
-    po_entries = parse_po(PO_PATH)
+def validate_one(po_path, pot_entries, pot_dupes):
+    po_entries = parse_po(po_path)
 
     pot_ids = {mid for mid, _, _, _ in pot_entries}
     po_ids = {mid for mid, _, _, _ in po_entries}
 
     po_dupes = find_duplicates(po_entries)
-    pot_dupes = find_duplicates(pot_entries)
     fuzzy_empty = [e for e in po_entries if e[2] and e[1].strip() == ""]
     stale = po_ids - pot_ids
     translated = [e for e in po_entries if e[1].strip() != ""]
 
-    print(f"pot entries (unique msgid): {len(pot_ids)}")
+    print(f"\n=== {po_path.name} ===")
     print(f"po entries (unique msgid):  {len(po_ids)}")
     print(
         f"translated: {len(translated)} "
@@ -143,9 +156,17 @@ def main():
 
     ok = True
 
+    display_name = get_header(po_path).get("X-Display-Name")
+    if not display_name:
+        ok = False
+        print(f"\nFAIL: {po_path.name} is missing the 'X-Display-Name' header "
+              f"(used as the in-game Settings menu label by scripts/build_data.csx).")
+    else:
+        print(f"X-Display-Name: {display_name}")
+
     if po_dupes:
         ok = False
-        print(f"\nFAIL: {len(po_dupes)} duplicate msgid(s) in {PO_PATH.name}:")
+        print(f"\nFAIL: {len(po_dupes)} duplicate msgid(s) in {po_path.name}:")
         for mid in list(po_dupes)[:20]:
             print(f"  {mid!r}")
 
@@ -165,6 +186,28 @@ def main():
         print(f"\nWARNING: {len(stale)} msgid(s) in po but not in the current .pot (sample):")
         for mid in list(stale)[:10]:
             print(f"  {mid!r}")
+
+    return ok
+
+
+def main():
+    if not POT_PATH.exists():
+        print(f"ERROR: {POT_PATH} not found (run scripts/extract_pot.csx).")
+        return 1
+
+    po_paths = sorted(LOCALE_DIR.glob("*.po"))
+    if not po_paths:
+        print(f"ERROR: no locale/*.po files found in {LOCALE_DIR}.")
+        return 1
+
+    pot_entries = parse_po(POT_PATH)
+    pot_dupes = find_duplicates(pot_entries)
+    print(f"pot entries (unique msgid): {len({mid for mid, _, _, _ in pot_entries})}")
+
+    ok = True
+    for po_path in po_paths:
+        if not validate_one(po_path, pot_entries, pot_dupes):
+            ok = False
 
     print("\n" + ("PASS" if ok else "FAIL"))
     return 0 if ok else 1

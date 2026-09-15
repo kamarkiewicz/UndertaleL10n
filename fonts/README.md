@@ -1,8 +1,8 @@
 # Fonts
 
 Font sheets (PNG + CSV with glyph metrics) with an extended character set,
-swapped into `data.win` by `scripts/apply_locale.csx`. Shared by all
-locales under `locale/` — not specific to Polish.
+swapped into `data.win` by `scripts/build_data.csx`. Shared by all
+locales under `locale/` — not specific to any one language.
 
 Source: https://github.com/SlayerIbn/UNDERTALE-DELTARUNE-Translation-Resources
 
