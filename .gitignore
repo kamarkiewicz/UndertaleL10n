@@ -1,0 +1,4 @@
+/UndertaleModCli/
+/build/*
+!/build/pristine.win
+.DS_Store
