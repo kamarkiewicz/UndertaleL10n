@@ -32287,6 +32287,9 @@ msgstr "Potęga./"
 msgid "Present Bomb"
 msgstr "Prezentacyjna Bomba"
 
+msgid "Press \\*X to Finish"
+msgstr "Wciśnij \\*X aby zakończyć"
+
 #, fuzzy
 msgid "Professional#Frog"
 msgstr "Profesjonalna#Żaba"
