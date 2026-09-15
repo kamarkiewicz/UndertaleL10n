@@ -2,3 +2,6 @@
 /build/*
 !/build/pristine.win
 .DS_Store
+__pycache__/
+*.py[codz]
+*$py.class
