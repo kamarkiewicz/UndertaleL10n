@@ -24399,6 +24399,9 @@ msgstr "WSZAKŻE JESTEM&BARDZO WSPANIAŁY./"
 msgid "AFTER YOU HANG&OUT WITH ME.../"
 msgstr "JAK JUŻ SPOTKASZ&SIĘ ZE MNĄ.../"
 
+msgid "After a long battle^1,&the humans were&victorious^6. \\E1 ^1 %"
+msgstr "Po długiej walce^1,&ludzie odnieśli&zwycięstwo^6. \\E1 ^1 %"
+
 #, fuzzy
 msgid "AH-HA^1!&INTERESTED IN&MY FOOD MUSEUM?/"
 msgstr "A HA^1!&ZACIEKAWIONY MOIM&MUZEUM JEDZENIA?/"
@@ -30858,6 +30861,9 @@ msgstr "Stary^1, ten&gość jest&wnerwiający!/"
 msgid "Manly Bandanna"
 msgstr "Męska Chusta"
 
+msgid "Many years later^2.^2.^5.  \\E1 ^1 %"
+msgstr "Wiele lat później^2.^2.^5.  \\E1 ^1 %"
+
 #, fuzzy
 msgid "Maybe,"
 msgstr "Chyba,"
@@ -34748,6 +34754,9 @@ msgstr "Mówią, że mam&głos Syreny..^1./"
 #, fuzzy
 msgid "They say even if&you are a hyper-&violent murderer.../"
 msgstr "Mówią, że&mimo, iż jesteś&super brutalnym&mordercą.../"
+
+msgid "They sealed the monsters&underground with a magic&spell^6. \\E0 ^1 %"
+msgstr "Zapieczętowali potwory&pod ziemią magicznym&zaklęciem^6. \\E0 ^1 %"
 
 #, fuzzy
 msgid "They thought&that he had&killed the&child./%%"
