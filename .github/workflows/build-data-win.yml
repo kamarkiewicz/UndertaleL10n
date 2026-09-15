@@ -50,21 +50,15 @@ jobs:
           GAME_SHA=$(grep -oP '(?<=X-Game-Data-SHA256: )[^\\]+' locale/undertale.pot)
 
           cat > release_notes.md <<EOF
-          Automatycznie zbudowany plik \`data.win\` z aktualnym polskim
-          tłumaczeniem (z \`locale/pl_PL.po\`, commit \`${GITHUB_SHA::7}\`).
+          Automatycznie zbudowany plik \`data.win\` z aktualnym polskim tłumaczeniem (z \`locale/pl_PL.po\`, commit \`${GITHUB_SHA::7}\`).
 
           **Tłumaczenie zgodne z wersją gry:** \`${GAME_VERSION}\`
           (SHA-256 oryginalnego data.win: \`${GAME_SHA}\`)
 
           **Instalacja:**
           1. Pobierz \`data.win\` poniżej.
-          2. Zrób kopię zapasową oryginalnego \`data.win\` z folderu gry
-             (Undertale/data.win).
+          2. Zrób kopię zapasową oryginalnego \`data.win\` z folderu gry (Undertale/data.win).
           3. Podmień plik w folderze gry na pobrany.
-
-          Tłumaczenie w trakcie tworzenia — część tekstów wciąż jest po
-          angielsku (fallback zamiast błędu). Szczegóły i status w głównym
-          [README](https://github.com/${GITHUB_REPOSITORY}#readme).
           EOF
 
           gh release view polish-release >/dev/null 2>&1 || gh release create polish-release \
