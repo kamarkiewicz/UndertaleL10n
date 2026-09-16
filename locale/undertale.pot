@@ -4,9 +4,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-15 22:12+0000\n"
-"X-Game-Data-Version: 1.0.0.1539\n"
-"X-Game-Data-SHA256: 946e83f37c9eede0f7955f3bf51959e7d02366fc8d8cbc711154aaac66e2a8e6\n"
+"POT-Creation-Date: 2026-09-16 14:48+0000\n"
 
 msgid " "
 msgstr ""
@@ -42938,7 +42936,16 @@ msgstr ""
 msgid "Don't know"
 msgstr ""
 
+msgid "DEUTSCH"
+msgstr ""
+
 msgid "ESPAÑOL"
+msgstr ""
+
+msgid "FRANÇAIS"
+msgstr ""
+
+msgid "ITALIANO"
 msgstr ""
 
 msgid "POLSKI"
@@ -43141,3 +43148,4 @@ msgstr ""
 
 msgid "bepis"
 msgstr ""
+

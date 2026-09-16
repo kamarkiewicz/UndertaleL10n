@@ -40,8 +40,8 @@ public static class GmlPatch
                     $"'patch' failed applying {patchFilePath} (exit {proc.ExitCode}):\n" +
                     stdout + stderr +
                     "\nThe decompiled GML this patch expects to match has probably " +
-                    "drifted (e.g. build/pristine.win was updated) - regenerate the " +
-                    "patch against the current vanilla decompile.");
+                    "drifted (e.g. the pristine source in build/ was updated) - " +
+                    "regenerate the patch against the current vanilla decompile.");
 
             return File.ReadAllText(tempOut);
         }

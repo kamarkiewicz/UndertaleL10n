@@ -1,6 +1,8 @@
 /UndertaleModCli/
 /build/*
-!/build/pristine.win
+!/build/*_data.win
+!/build/*_game.ios
+!/build/*_game.unx
 .DS_Store
 __pycache__/
 *.py[codz]

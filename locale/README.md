@@ -18,22 +18,30 @@
 ## Generating/updating `undertale.pot`
 
 ```bash
-UndertaleModCli/UndertaleModCli load build/pristine.win \
+UndertaleModCli/UndertaleModCli load build/steam_data.win \
+  --scripts scripts/build_data.csx -o build/data_final.win -f
+UndertaleModCli/UndertaleModCli load build/data_final.win \
   --scripts scripts/extract_pot.csx
 ```
 
-Always run this **on a clean, original `data.win`** (see `pristine.win` in
-the main README) — otherwise the `.pot` will capture already-localized text
-instead of the English original. (In practice this matters less than it
-used to: since `build_data.csx` only *adds* languages rather than
-overwriting English, an already-localized install still has intact English
-text — but a pristine copy remains the safest, most predictable source.)
+Run this against a **freshly rebuilt `scripts/build_data.csx` output**, not
+directly against a pristine data file. This is the opposite of the old
+advice here, and matters for a concrete reason: some translatable strings
+only exist because `build_data.csx`/`patches/*.patch` add them at build
+time (e.g. the `custom_mtt_essaywords_<N>` keys `patches/gml_Object_obj_essaystuff_Draw_0.patch`
+routes through `scr_gettext`, and each locale's own
+`settings_language_<code>` label) - they're not in any pristine file's
+`gml_Script_textdata_en` at all, only in a built one. Extracting straight
+from pristine silently drops them from the `.pot` (and would make
+`scripts/validate_po.py` start reporting existing translations for them as
+"stale").
 
-The script writes into the `.pot` header the game data version it was
-built from (`Data.GeneralInfo.Major.Minor.Release.Build`) as
-`X-Game-Data-Version`, the SHA-256 of the exact source `data.win` as
-`X-Game-Data-SHA256` (since different builds can share the same version
-number, and the hash unambiguously identifies the bytes), and the
-generation date as `POT-Creation-Date` — so it's always clear exactly which
-version of the game a given `.pot` matches, without a separate file to
-track.
+Since `build_data.csx` only *adds* languages rather than overwriting
+English, this is safe even against an install that already has other
+locales built in - the English text stays intact either way.
+
+(The `.pot` header used to also record a source file's version/SHA-256,
+back when there was only one pristine file project-wide. Now that
+"Platforms" in the main README covers several, each with its own version,
+a single version/hash on the `.pot` would just be misleading, so it's not
+tracked there anymore - `POT-Creation-Date` is the only provenance left.)

@@ -89,8 +89,8 @@ project hasn't attempted yet.
 ## Setup
 
 `UndertaleModCli/` is in `.gitignore` and not part of the repo. `build/` is
-gitignored too, except `build/pristine.win`, which is tracked via Git LFS
-(see the "Directory layout" section below).
+gitignored too, except the pristine copies described in "Platforms" below,
+which are tracked via Git LFS (see the "Directory layout" section below).
 
 1. Download the nightly `UndertaleModCli` build for your system:
    https://github.com/UnderminersTeam/UndertaleModTool/releases/tag/nightly
@@ -164,15 +164,54 @@ sounds/                   Translated embedded sound effects (voice lines that do
                           as plain text). See sounds/README.md.
 
 .github/workflows/        CI: validates every locale/*.po on every push/PR, and builds+publishes
-                          a ready-to-use data.win to the "multilingual" GitHub Release whenever
-                          a translation changes on main (see the top of this README).
+                          a ready-to-use data file per platform to the "multilingual" GitHub
+                          Release whenever a translation changes on main (see "Platforms" below).
 
-build/                    Scratch space, gitignored EXCEPT `pristine.win` (tracked via Git LFS
-                          — the only copy of a clean, original data.win; CI needs it to build
-                          releases, and without it locally you'd have to make one again from a
-                          not-yet-localized copy of the game). Everything else here (dumps,
-                          backups, working `.win` files) can be cleared at any time.
+build/                    Scratch space, gitignored EXCEPT the pristine copies described in
+                          "Platforms" below (`<storefront>_<filename>`, tracked via Git LFS —
+                          CI needs them to build releases, and without them locally you'd have
+                          to make your own again from a not-yet-localized copy of the game).
+                          Everything else here (dumps, working `.win`/`.ios` files) can be
+                          cleared at any time.
 ```
+
+## Platforms
+
+Undertale ships the same underlying data under a different filename per
+platform (a GameMaker: Studio 1.x runtime convention, not something specific
+to a storefront) - `scripts/build_data.csx` works against any of them
+unchanged, it just needs the right pristine source loaded. Each one we
+support is tracked in `build/<storefront>_<real filename>`, e.g.
+`build/steam_data.win`:
+
+| Platform | Real filename | Location | Pristine copy | Confirmed? |
+| --- | --- | --- | --- | --- |
+| Windows | `data.win` | game folder | `build/steam_data.win` | yes |
+| macOS | `game.ios` | `UNDERTALE.app/Contents/Resources/` | `build/steam_game.ios` | yes |
+| Linux | `game.unx` | game folder | — | yes |
+
+Different **storefronts** on the same platform can ship different bytes
+even at the same nominal version (see `UTES_1.1/`'s own installer, which
+needed a separate xdelta just to convert a GOG/Collector's-Edition
+`data.win` to the Steam one it actually patches) - so a GOG copy would need
+its own pristine file (`build/gog_data.win` etc.), not reuse Steam's.
+Currently only Steam is covered, for both platforms above.
+
+Adding a platform/storefront:
+1. Get a clean, unmodified copy of that data file (see the "Adding a new
+   language" section's approach to obtaining a pristine source, or copy it
+   directly from your own install of the game before ever localizing it).
+2. `cp <source> build/<storefront>_<real filename>` (LFS-tracked
+   automatically via `.gitattributes`' `build/*_data.win` /
+   `build/*_game.ios` / `build/*_game.unx` patterns).
+3. Confirm it builds: `UndertaleModCli/UndertaleModCli load
+   build/<storefront>_<real filename> --scripts scripts/build_data.csx -o
+   /tmp/test.<ext> -f` - if a game version drifted enough from what the
+   existing `patches/*.patch` were derived from, this is where you'd find
+   out (a patch fails to apply, or the build succeeds but something reads
+   wrong in-game - re-derive the affected patch against this platform's own
+   decompile if so).
+4. Add a `matrix.include` entry to `.github/workflows/build-release.yml`.
 
 ## Workflow: adding/fixing a translation
 
@@ -191,23 +230,20 @@ build/                    Scratch space, gitignored EXCEPT `pristine.win` (track
    must match the original, including `&`, `#`, `\[1]` etc. — these are the
    game's own formatting markers, not real newlines).
 
-4. Build and install (always on a copy, never overwrite the original
-   without a backup). Keep backups in `build/`:
+4. Build and install:
    ```bash
-   # Always build from the CLEAN original, NOT from an already-patched file.
-   # Make build/pristine.win ONCE, right after installing/updating the game, before
-   # any localized data.win overwrites it — then keep that copy in build/
-   # and use it instead of $GAME/data.win (which may already be localized).
-   # cp "$GAME/data.win" build/pristine.win
+   # Always build from a pristine copy (build/<storefront>_<filename> - see
+   # "Platforms" above), NOT from an already-localized file.
 
-   UndertaleModCli/UndertaleModCli load build/pristine.win -v \
+   UndertaleModCli/UndertaleModCli load build/steam_data.win -v \
      --scripts scripts/build_data.csx \
      -o build/data_multi.win -f
 
-   cp "$GAME/data.win" "build/data_backup_$(date +%Y%m%d_%H%M%S).win"
    cp build/data_multi.win "$GAME/data.win"
    md5 "$GAME/data.win" build/data_multi.win   # must match
    ```
+   (macOS: same idea against `build/steam_game.ios`, installing to
+   `UNDERTALE.app/Contents/Resources/game.ios`.)
    `build_data.csx` bundles **every** `locale/*.po` with translated content
    into the one output file — in-game, pick the language from
    Settings → Language.

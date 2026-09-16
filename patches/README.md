@@ -34,7 +34,8 @@ here.
 
 ## Adding/editing a patch
 
-1. Decompile the target entry from a clean `build/pristine.win` (e.g. via
+1. Decompile the target entry from a clean pristine copy (e.g.
+   `build/steam_data.win` - see the main README's "Platforms" section, via
    a throwaway `.csx` calling `GetDecompiledText`) to get the "before"
    text.
 2. Copy it and make the edit you want, to get the "after" text.

@@ -1,0 +1,190 @@
+name: Build release
+
+# Builds a data file with every locale/<code>.po built in as a selectable
+# in-game language (Settings > Language), for every platform/storefront
+# combination we have a pristine source for (build/<storefront>_<filename>),
+# and publishes each as a downloadable asset on the "multilingual" GitHub
+# Release.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "locale/*.po"
+      - "fonts/**"
+      - "sprites/**"
+      - "sounds/**"
+      - "patches/*.patch"
+      - "scripts/build_data.csx"
+      - "scripts/lib/*.csx"
+      - "build/*_data.win"
+      - "build/*_game.ios"
+      - "build/*_game.unx"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          # Release assets are named exactly like their build/ source
+          # (<storefront>_<real filename> - see README's "Platforms"
+          # section) - players rename to the real filename on install,
+          # e.g. steam_data.win -> data.win.
+          - pristine: build/steam_data.win
+            asset: steam_data.win
+            label: Windows (Steam)
+          - pristine: build/steam_game.ios
+            asset: steam_game.ios
+            label: macOS (Steam)
+    steps:
+      - name: Checkout (with LFS)
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Download UndertaleModCli (nightly, Linux)
+        run: |
+          curl -sL -o cli.zip \
+            "https://github.com/UnderminersTeam/UndertaleModTool/releases/download/nightly/CLI-ubuntu-latest-Debug-isBundled-true.zip"
+          mkdir -p UndertaleModCli
+          unzip -q cli.zip -d UndertaleModCli
+          chmod +x UndertaleModCli/UndertaleModCli
+          rm cli.zip
+
+      - name: Build ${{ matrix.asset }} (${{ matrix.label }}) with every registered locale
+        run: |
+          UndertaleModCli/UndertaleModCli load "${{ matrix.pristine }}" \
+            --scripts scripts/build_data.csx \
+            -o "${{ matrix.asset }}" -f
+
+      - name: Record this platform's own pristine source version
+        run: |
+          SOURCE_INFO_OUT="${{ matrix.asset }}.info" \
+            UndertaleModCli/UndertaleModCli load "${{ matrix.pristine }}" \
+            --scripts scripts/source_info.csx
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset }}
+          path: |
+            ${{ matrix.asset }}
+            ${{ matrix.asset }}.info
+          retention-days: 1
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download all built assets
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: Publish/update the multilingual GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 > release_notes.md <<'PY'
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from validate_po import get_header, LOCALE_DIR
+
+          # Each platform build's own pristine source version - see
+          # scripts/source_info.csx. Different platforms/storefronts can
+          # report different version numbers for what's otherwise the same
+          # translatable text (confirmed: Windows Steam vs macOS Steam), so
+          # there's no single "the game version" - each asset gets its own.
+          def read_info(asset):
+              info = {}
+              path = Path("dist") / f"{asset}.info"
+              for line in path.read_text().splitlines():
+                  key, _, value = line.partition("=")
+                  info[key] = value
+              return info
+
+          platforms = [
+              ("steam_data.win", "data.win", "Windows (Steam)", ""),
+              ("steam_game.ios", "game.ios", "macOS (Steam)",
+               " (inside `UNDERTALE.app/Contents/Resources/`)"),
+          ]
+
+          # Per-language install instructions. Add an entry here whenever a
+          # new locale/<code>.po is added; unknown codes get a generic
+          # English fallback so the release still builds without one.
+          INSTRUCTIONS = {
+              "de": ("🇩🇪", "Deutsch",
+                     "lade die Datei für deine Plattform herunter und "
+                     "benenne sie wie oben beschrieben um. Sprache im Spiel "
+                     "wechseln: Settings → Language (Pfeiltasten "
+                     "links/rechts)."),
+              "fr": ("🇫🇷", "Français",
+                     "téléchargez le fichier correspondant à votre "
+                     "plateforme et renommez-le comme indiqué ci-dessus. "
+                     "Changez de langue en jeu : Settings → Language "
+                     "(flèches gauche/droite)."),
+              "it": ("🇮🇹", "Italiano",
+                     "scarica il file corrispondente alla tua piattaforma e "
+                     "rinominalo come indicato sopra. Cambia lingua in "
+                     "gioco: Settings → Language (frecce sinistra/destra)."),
+              "pl": ("🇵🇱", "Polski",
+                     "pobierz plik dla swojej platformy i zmień mu nazwę "
+                     "zgodnie z opisem wyżej. Język wybierz w grze: "
+                     "Settings → Language (strzałki lewo/prawo)."),
+              "es": ("🇪🇸", "Español",
+                     "descarga el archivo correspondiente a tu plataforma y "
+                     "renómbralo como se indica arriba. Elige idioma en el "
+                     "juego: Settings → Language (flechas "
+                     "izquierda/derecha)."),
+          }
+
+          lines = [
+              "Download the file matching your platform+storefront below, "
+              "and rename it to replace the same-named file in your game "
+              "folder:",
+          ]
+          for asset, real_name, label, location in platforms:
+              info = read_info(asset)
+              lines.append(
+                  f"- **{label}:** `{asset}` → rename to `{real_name}`{location} "
+                  f"(game version `{info['version']}`, SHA-256 of that source: "
+                  f"`{info['sha256']}`)"
+              )
+          lines += [
+              "",
+              "🇬🇧 **English:** switch language in-game: Settings → Language "
+              "(left/right arrows).",
+          ]
+          for po_path in sorted(LOCALE_DIR.glob("*.po")):
+              code = po_path.stem
+              display_name = get_header(po_path)["X-Display-Name"]
+              flag, label, text = INSTRUCTIONS.get(
+                  code,
+                  ("🌐", display_name,
+                   "download the file matching your platform and rename it "
+                   "as described above. Switch language in-game: Settings → "
+                   "Language."),
+              )
+              lines.append("")
+              lines.append(f"{flag} **{label}:** {text}")
+
+          print("\n".join(lines))
+          PY
+
+          gh release view multilingual >/dev/null 2>&1 || gh release create multilingual \
+            --title "Multilingual" \
+            --prerelease \
+            --notes-file release_notes.md
+
+          gh release upload multilingual dist/steam_data.win dist/steam_game.ios --clobber
+          gh release edit multilingual --notes-file release_notes.md
