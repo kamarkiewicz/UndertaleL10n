@@ -13,8 +13,9 @@ Download `data.win` from the [**Multilingual** release](../../releases/tag/multi
 | Language | Coverage | Credits |
 | --- | --- | --- |
 | 🇩🇪 Deutsch | 96.3% | [gamegladiators.de](https://gamegladiators.de/page/undertale) v1.08 Steam |
-| 🇵🇱 Polski | 94.7% | Krzyhau |
 | 🇪🇸 Español | 95.4% | [Undertale-Spanish (UTES) v1.1](https://undertale-spanish.com/) |
+| 🇮🇹 Italiano | 94.9% | [Undertale Spaghetti Project (USP)](https://undertaleita.net/) |
+| 🇵🇱 Polski | 94.7% | Krzyhau |
 
 Coverage is against `locale/undertale.pot`, i.e. the text the game's own
 translation system can reach — see "Known limitations" below for text it
@@ -131,6 +132,7 @@ scripts/                  Our tooling.
   lib/GmlPatch.csx          Applies a patches/*.patch unified diff to a decompiled GML string
                             via the system `patch` binary.
   lib/SpriteImport.csx      Imports sprites/*.png (translated UI graphics) as new sprite assets.
+  lib/SoundImport.csx       Imports sounds/*.wav (translated embedded sound effects).
   extract_pot.csx           Decompiles gml_Script_textdata_en into a .pot (template) - every
                             real, in-game, user-facing string (not a raw Data.Strings dump).
   build_data.csx            Compiles every locale/<code>.po into the game's own multi-language
@@ -156,6 +158,9 @@ fonts/                    Font sheets (PNG + CSV) with an extended character set
 
 sprites/                  Translated UI graphics (button/sign images with text baked into
                           the pixels - scr_gettext can't reach these). See sprites/README.md.
+
+sounds/                   Translated embedded sound effects (voice lines that don't work
+                          as plain text). See sounds/README.md.
 
 .github/workflows/        CI: validates every locale/*.po on every push/PR, and builds+publishes
                           a ready-to-use data.win to the "multilingual" GitHub Release whenever

@@ -41,6 +41,7 @@
 #load "lib/GmlText.csx"
 #load "lib/GmlPatch.csx"
 #load "lib/SpriteImport.csx"
+#load "lib/SoundImport.csx"
 
 using System;
 using System.Collections.Generic;
@@ -178,6 +179,19 @@ if (Directory.Exists(spritesDir))
 else
 {
     System.Console.WriteLine($"[sprites] No sprites/ directory at {spritesDir}, skipping sprite import.");
+}
+
+// --- 1c. Translated embedded sound effects ---------------------------------
+
+string soundsDir = Path.Join(root, "sounds");
+if (Directory.Exists(soundsDir))
+{
+    int soundsImported = SoundImport.ImportAll(Data, soundsDir);
+    System.Console.WriteLine($"[sounds] Imported {soundsImported} translated sound(s).");
+}
+else
+{
+    System.Console.WriteLine($"[sounds] No sounds/ directory at {soundsDir}, skipping sound import.");
 }
 
 // --- 2. Discover locales (locale/<code>.po) + the game's own English key/text table -----

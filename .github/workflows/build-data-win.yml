@@ -66,6 +66,10 @@ jobs:
                      "lade `data.win` herunter und ersetze `Undertale/data.win` "
                      "im Spielordner. Sprache im Spiel wechseln: Settings → "
                      "Language (Pfeiltasten links/rechts)."),
+              "it": ("🇮🇹", "Italiano",
+                     "scarica `data.win` e sostituisci `Undertale/data.win` nella "
+                     "cartella del gioco. Cambia lingua in gioco: Settings → "
+                     "Language (frecce sinistra/destra)."),
               "pl": ("🇵🇱", "Polski",
                      "pobierz `data.win` i podmień nim `Undertale/data.win` w "
                      "folderze gry. Język wybierz w grze: Settings → Language "

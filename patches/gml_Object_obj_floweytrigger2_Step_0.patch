@@ -1,0 +1,20 @@
+--- a/gml_Object_obj_floweytrigger2_Step_0.gml
++++ b/gml_Object_obj_floweytrigger2_Step_0.gml
+@@ -10,10 +10,15 @@
+         }
+         else
+         {
+-            if (global.language == "ja")
++            var localized_snd = -1;
++            if (global.language != "en")
+             {
+-                snd_play(snd_wonderfulidea_ja);
++                localized_snd = asset_get_index("snd_wonderfulidea_" + global.language);
+             }
++            if (localized_snd != -1)
++            {
++                snd_play(localized_snd);
++            }
+             else
+             {
+                 snd_play(snd_wonderfulidea);

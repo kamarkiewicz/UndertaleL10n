@@ -45,10 +45,20 @@ main README) - `spr_barktry`, `spr_cbone`, `spr_dbone`, `spr_oolbone`,
 `spr_snowsans`, and `spr_udebone` weren't translated by that patch either
 and are simply absent here too.
 
-`pl` (Polski): none - no source material exists to extract from. These
-sprites fall back to English for Polish until someone creates matching
-artwork (same `<base_name>_pl.png` + a `sprites.csv`/`frames.csv` entry
-would be picked up automatically - no code changes needed).
+`it` (Italiano): 64 sprites (the broadest coverage of any bundled
+language, including the ones `es` is missing above), extracted from the
+Undertale Spaghetti Project (USP) installer's own asset bundle (see
+`locale/it.po`'s `X-Source` header). A couple of USP's sprites
+(`spr_pressz`, `spr_wordtest_full`) don't correspond to a vanilla sprite
+name in this game version and were skipped; two others
+(`spr_fileerased_parts`, `spr_happybreaktime`) only had translated art for
+some of their frames, so only those frames were imported.
+
+`de` (Deutsch), `pl` (Polski): none - no source material exists to
+extract from yet. These sprites fall back to English until someone
+creates matching artwork (same `<base_name>_<code>.png` + a
+`sprites.csv`/`frames.csv` entry would be picked up automatically - no
+code changes needed).
 
 ## Adding a sprite
 
