@@ -10,6 +10,7 @@ on:
     paths:
       - "locale/*.po"
       - "fonts/**"
+      - "sprites/**"
       - "patches/*.patch"
       - "scripts/build_data.csx"
       - "scripts/lib/*.csx"

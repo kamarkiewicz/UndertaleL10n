@@ -40,6 +40,7 @@
 #load "lib/PoFile.csx"
 #load "lib/GmlText.csx"
 #load "lib/GmlPatch.csx"
+#load "lib/SpriteImport.csx"
 
 using System;
 using System.Collections.Generic;
@@ -164,6 +165,19 @@ if (Directory.Exists(fontsDir))
 else
 {
     System.Console.WriteLine($"[fonts] No fonts/ directory at {fontsDir}, skipping font patch.");
+}
+
+// --- 1b. Translated UI sprites (button/sign graphics with baked-in text) --
+
+string spritesDir = Path.Join(root, "sprites");
+if (Directory.Exists(spritesDir))
+{
+    int spritesImported = SpriteImport.ImportAll(Data, spritesDir);
+    System.Console.WriteLine($"[sprites] Imported {spritesImported} translated sprite(s).");
+}
+else
+{
+    System.Console.WriteLine($"[sprites] No sprites/ directory at {spritesDir}, skipping sprite import.");
 }
 
 // --- 2. Discover locales (locale/<code>.po) + the game's own English key/text table -----

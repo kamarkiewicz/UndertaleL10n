@@ -52,6 +52,16 @@ can't.
 - **Translations use the real `.po` format** (gettext), not ad-hoc JSON —
   editable in Poedit/Lokalize, with support for `#, fuzzy` (needs review)
   and comments.
+- **Some UI text is baked into sprite pixels, not GML strings** (`FIGHT`,
+  `ACT`, `ITEM`, `MERCY`, sign graphics, minigame images) — `scr_gettext`
+  can't reach it, no matter what's in a `.po`. Vanilla already has an
+  analogous mechanism for this, `scr_getsprite()`, hardcoded the same way
+  `scr_gettext` was (`global.language == "ja"` swaps in a `..._ja` sprite
+  variant); `patches/gml_Script_scr_getsprite.patch` generalizes it the
+  same way, into a dynamic `asset_get_index(name + "_" + global.language)`
+  lookup. See `sprites/README.md` — this needs actual translated artwork,
+  not just a code change; `es` reuses artwork from Undertale-Spanish
+  (UTES) v1.1, `pl` currently has none.
 
 ## Known limitations
 
@@ -63,6 +73,15 @@ That text isn't in `gml_Script_textdata_en`, so it's not in
 reach it — `scripts/validate_po.py` reports translated entries for such
 text as "stale" (present in the `.po`, absent from the `.pot`) since
 they don't correspond to any translatable key.
+
+Some sign/UI graphics also can't be reached yet even with translated
+artwork in hand: their vanilla object either doesn't exist at all (drawn
+directly as a room tile - `spr_out_to_lunch_sign`) or would need a brand
+new object placed in a room (`obj_grillbysign`, `obj_mtthotelsign`,
+`obj_schoolsign`, `obj_temsign`, `obj_alphyslabsignl`/`r`, `obj_exitsign`,
+`obj_inn_shopsign`, `obj_mtt_innershopsign`, `obj_mttshopsign` - all of
+which UTES added from scratch). Room-editing is a category of change this
+project hasn't attempted yet.
 
 ## Setup
 
@@ -110,10 +129,11 @@ scripts/                  Our tooling.
                             + concatenation - GML can't escape its own delimiter quote).
   lib/GmlPatch.csx          Applies a patches/*.patch unified diff to a decompiled GML string
                             via the system `patch` binary.
+  lib/SpriteImport.csx      Imports sprites/*.png (translated UI graphics) as new sprite assets.
   extract_pot.csx           Decompiles gml_Script_textdata_en into a .pot (template) - every
                             real, in-game, user-facing string (not a raw Data.Strings dump).
   build_data.csx            Compiles every locale/<code>.po into the game's own multi-language
-                            system + applies fonts/ and patches/. See "Architecture" above.
+                            system + applies fonts/, sprites/, and patches/. See "Architecture" above.
   check_fonts.csx           Diagnostics: which characters are missing from which font.
   validate_po.py            Sanity-checks every locale/<code>.po against undertale.pot (dupes,
                             broken fuzzy entries, missing X-Display-Name header). Run manually
@@ -132,6 +152,9 @@ patches/                  Locale-count-independent GML changes (Settings menu cy
 fonts/                    Font sheets (PNG + CSV) with an extended character set,
                           shared by ALL locales (not just pl).
                           See fonts/README.md.
+
+sprites/                  Translated UI graphics (button/sign images with text baked into
+                          the pixels - scr_gettext can't reach these). See sprites/README.md.
 
 .github/workflows/        CI: validates every locale/*.po on every push/PR, and builds+publishes
                           a ready-to-use data.win to the "multilingual" GitHub Release whenever

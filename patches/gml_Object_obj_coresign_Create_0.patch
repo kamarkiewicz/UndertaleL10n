@@ -1,0 +1,5 @@
+--- a/gml_Object_obj_coresign_Create_0.gml
++++ b/gml_Object_obj_coresign_Create_0.gml
+@@ -1 +1,2 @@
+ image_speed = 0.125;
++sprite_index = scr_getsprite(sprite_index);
