@@ -100,10 +100,7 @@ jobs:
           sys.path.insert(0, 'scripts')
           from validate_po import get_header, parse_po, LOCALE_DIR
 
-          BANNER = (
-              "https://raw.githubusercontent.com/kamarkiewicz/UndertaleL10n/"
-              "main/.github/assets/release-banner.png"
-          )
+          BANNER = "https://upload.wikimedia.org/wikipedia/commons/2/26/Undertale-logo.jpg"
 
           # Each platform build's own pristine source version - see
           # scripts/source_info.csx. Different platforms/storefronts can
@@ -124,34 +121,9 @@ jobs:
                " (inside `UNDERTALE.app/Contents/Resources/`)"),
           ]
 
-          # Per-language install instructions. Add an entry here whenever a
-          # new locale/<code>.po is added; unknown codes get a generic
-          # English fallback so the release still builds without one.
-          INSTRUCTIONS = {
-              "de": ("🇩🇪", "Deutsch",
-                     "lade die Datei für deine Plattform herunter und "
-                     "benenne sie wie oben beschrieben um. Sprache im Spiel "
-                     "wechseln: Settings → Language (Pfeiltasten "
-                     "links/rechts)."),
-              "fr": ("🇫🇷", "Français",
-                     "téléchargez le fichier correspondant à votre "
-                     "plateforme et renommez-le comme indiqué ci-dessus. "
-                     "Changez de langue en jeu : Settings → Language "
-                     "(flèches gauche/droite)."),
-              "it": ("🇮🇹", "Italiano",
-                     "scarica il file corrispondente alla tua piattaforma e "
-                     "rinominalo come indicato sopra. Cambia lingua in "
-                     "gioco: Settings → Language (frecce sinistra/destra)."),
-              "pl": ("🇵🇱", "Polski",
-                     "pobierz plik dla swojej platformy i zmień mu nazwę "
-                     "zgodnie z opisem wyżej. Język wybierz w grze: "
-                     "Settings → Language (strzałki lewo/prawo)."),
-              "es": ("🇪🇸", "Español",
-                     "descarga el archivo correspondiente a tu plataforma y "
-                     "renómbralo como se indica arriba. Elige idioma en el "
-                     "juego: Settings → Language (flechas "
-                     "izquierda/derecha)."),
-          }
+          # Per-language flag. Add an entry here whenever a new locale/<code>.po
+          # is added; unknown codes fall back to a generic globe.
+          FLAGS = {"de": "🇩🇪", "fr": "🇫🇷", "it": "🇮🇹", "pl": "🇵🇱", "es": "🇪🇸"}
 
           # Credits not derivable from the .po's own X-Source header (kept in
           # sync with the README's "I want to play" table).
@@ -175,16 +147,14 @@ jobs:
               return translated / len(pot_ids) if pot_ids else 0
 
           lines = [
-              f'<p align="center"><img src="{BANNER}" width="760" alt="Undertale battle menu with FIGHT/ACT/ITEM/MERCY translated into Spanish and Italian"></p>',
+              f'<p align="center"><img src="{BANNER}" width="360" alt="Undertale logo"></p>',
+              '<p align="center"><sub><strong>Localization Project</strong></sub></p>',
               "",
-              "<p align=\"center\"><em>Real in-game buttons - Español and Italiano ship "
-              "redrawn UI art too, not just translated text.</em></p>",
+              "Download the file for your platform, rename it, and drop it into your "
+              "game folder — then switch language in-game via **Settings → Language** "
+              "(left/right arrows).",
               "",
-              "## 🌍 Play Undertale in your language",
-              "",
-              "One file, no installer. Pick your platform, download, rename, play.",
-              "",
-              "### 📥 Download",
+              "### Download",
               "",
               "| Platform | File → rename to | Game version |",
               "|---|---|---|",
@@ -198,12 +168,8 @@ jobs:
               )
           lines += [
               "",
-              "Back up the original file, drop the renamed download in its place, launch "
-              "the game, then pick your language in **Settings → Language** (left/right "
-              "arrows).",
-              "",
               "<details>",
-              "<summary>🔒 Verify your download (SHA-256 of the pristine source each "
+              "<summary>Verify your download (SHA-256 of the pristine source each "
               "build started from)</summary>",
               "",
           ]
@@ -213,7 +179,7 @@ jobs:
               "",
               "</details>",
               "",
-              "### 🗣️ Languages included",
+              "### Languages",
               "",
               "| | Language | Coverage | Credit |",
               "|---|---|---|---|",
@@ -224,30 +190,19 @@ jobs:
               code = po_path.stem
               header = get_header(po_path)
               display_name = header["X-Display-Name"].title()
-              flag = INSTRUCTIONS.get(code, ("🌐",))[0]
+              flag = FLAGS.get(code, "🌐")
               lines.append(
                   f"| {flag} | {display_name} | {coverage_for(po_path):.0%} | "
                   f"{credit_for(code, header)} |"
               )
           lines += [
               "",
-              "<details>",
-              "<summary>📖 Switching instructions, in each language</summary>",
-              "",
+              "This project stands on the shoulders of giants: the community "
+              "translation teams credited above, and "
+              "[UndertaleModTool](https://github.com/UnderminersTeam/UndertaleModTool) "
+              "(UnderminersTeam), whose UndertaleModCli/UndertaleModLib make it "
+              "possible to rebuild `data.win` with every language baked in.",
           ]
-          for po_path in po_paths:
-              code = po_path.stem
-              display_name = get_header(po_path)["X-Display-Name"]
-              flag, label, text = INSTRUCTIONS.get(
-                  code,
-                  ("🌐", display_name,
-                   "download the file matching your platform and rename it "
-                   "as described above. Switch language in-game: Settings → "
-                   "Language."),
-              )
-              lines.append(f"{flag} **{label}:** {text}")
-              lines.append("")
-          lines += ["</details>"]
 
           print("\n".join(lines))
           PY
