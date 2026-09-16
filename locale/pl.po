@@ -6529,7 +6529,7 @@ msgstr "* Niełatwa atmosfera wypełnia&  pokój./%%"
 
 #, fuzzy
 msgid "* Ancient fusions between &  diversions and doorkeys./"
-msgstr "* To antyczne połączenia &  między rozbieżnością,&  a kluczem do wyjscia./"
+msgstr "* To antyczne połączenia &  między rozbieżnością,&  a kluczem do wyjścia./"
 
 #, fuzzy
 msgid "* And I called all of the&  families and told them&  everyone's alive./"
@@ -15921,7 +15921,7 @@ msgstr "* Niech ktoś mi pomoże..^1.&* Ktokolwiek..^1. proszę..^1.&* Pomocy...
 
 #, fuzzy
 msgid "* Someone ought to teach&  you how things work&  around here!/"
-msgstr "* Trzeba cię nauczyć &  jak to wszystku tu&  działa!/"
+msgstr "* Trzeba cię nauczyć &  jak to wszystko tu&  działa!/"
 
 #, fuzzy
 msgid "* Someone ought to teach&  you proper manners./"
@@ -21790,6 +21790,9 @@ msgstr "* Wyrwałeś kawałek Warzywoida^1.&* Odzyskałeś 5 PŻ!/^"
 msgid "* You took a piece.&* Boy^1, that's heavy./%%"
 msgstr "* Wziąłeś cukierak.&* Rany^1, jest ciężki./%%"
 
+msgid "* You took a piece of candy.&* (Press \\*C to open the menu.)/%%"
+msgstr "* Wziąłeś cukierka.&* (Wciśnij \\*C aby otworzyć menu.)/%%"
+
 #, fuzzy
 msgid "* You took more candy^1.&* How disgusting../%%"
 msgstr "* Wziąłeś więcej cukierków^1.&* Obrzydliwe.../%%"
@@ -23225,6 +23228,9 @@ msgstr "* ok^1, możesz wyjść./%%"
 #, fuzzy
 msgid "* okay..^1.&* follow my lead.../%%"
 msgstr "* okej..^1.&* rób to co ja.../%%"
+
+msgid "* okay..^1.&* press \\*Z repeatedly to&  encourage your snail./"
+msgstr "* okej..^1.&* naciskaj wielokrotnie \\*Z, by&  zachęcić swoją ślimaczkę./"
 
 #, fuzzy
 msgid "* omg i'm just gonna do it&* i'm just gonna call!!!!/%%"
