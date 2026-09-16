@@ -1,8 +1,10 @@
 --- a/gml_Object_obj_essaystuff_Draw_0.gml
 +++ b/gml_Object_obj_essaystuff_Draw_0.gml
-@@ -73,184 +73,184 @@
+@@ -72,185 +72,186 @@
+     swear = 0;
      nice = 0;
      beaut = 0;
++    spanish = 0;
      mystring_l = string_to_hiragana(string_lower(mystring));
 -    if (string_pos("beaut", mystring_l) > 0)
 +    if (string_pos(scr_gettext("custom_mtt_essaywords_1"), mystring_l) > 0)
@@ -221,7 +223,7 @@
      {
          beaut += 2;
          nice += 1;
-@@ -487,19 +487,19 @@
+@@ -487,19 +488,19 @@
      {
          global.msg[0] = scr_gettext("obj_essaystuff_226");
      }
@@ -245,7 +247,7 @@
      {
          spec = 3.3;
      }
-@@ -614,55 +614,55 @@
+@@ -614,55 +615,55 @@
      {
          global.msg[0] = scr_gettext("obj_essaystuff_264");
      }
@@ -314,7 +316,7 @@
      {
          spec = 4;
      }
-@@ -721,11 +721,11 @@
+@@ -721,11 +722,11 @@
      {
          global.msg[0] = scr_gettext("obj_essaystuff_255");
      }
@@ -328,7 +330,7 @@
      {
          spec = 0;
      }
-@@ -760,7 +760,7 @@
+@@ -760,7 +761,7 @@
      {
          global.msg[0] = scr_gettext("obj_essaystuff_264");
      }
@@ -337,7 +339,7 @@
      {
          spec = 6;
      }
-@@ -775,47 +775,47 @@
+@@ -775,47 +776,47 @@
      {
          global.msg[0] = scr_gettext("obj_essaystuff_271");
      }
@@ -396,3 +398,38 @@
      {
          swear = 1;
      }
+@@ -866,6 +867,17 @@
+     {
+         global.msg[0] = scr_gettext("obj_essaystuff_289");
+         global.msg[1] = scr_gettext("obj_essaystuff_290");
++    }
++    if (global.language == "es")
++    {
++        if (string_pos("español", mystring_l) > 0)
++        {
++            spanish = 1;
++        }
++        if (spanish == 1)
++        {
++            global.msg[0] = "¡Un idioma tan bello&y lleno de cultura&que no tiene límites!/%%";
++        }
+     }
+     done = 0;
+     if (swear == 1 && done == 0)
+@@ -878,6 +890,16 @@
+             event_user(0);
+         }
+     }
++    if (done == 0 && spanish == 1)
++    {
++        done = 1;
++        with (obj_ratingsmaster)
++        {
++            curtype = 12;
++            essay = 300;
++            event_user(0);
++        }
++    }
+     if (spec == 6)
+     {
+         if (done == 0)
