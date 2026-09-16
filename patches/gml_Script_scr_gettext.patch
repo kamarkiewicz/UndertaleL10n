@@ -21,3 +21,12 @@
      }
  }
  for (var i = 1; i <= (string_length(text) - 3); i++)
+@@ -22,7 +26,7 @@
+         {
+             replace = global.charname;
+         }
+-        else if (sel == "G")
++        else if (sel == "G" || sel == "P")
+         {
+             replace = string(global.gold);
+         }

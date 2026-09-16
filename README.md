@@ -14,6 +14,7 @@ Download `data.win` from the [**Multilingual** release](../../releases/tag/multi
 | --- | --- | --- |
 | 🇩🇪 Deutsch | 96.3% | [gamegladiators.de](https://gamegladiators.de/page/undertale) v1.08 Steam |
 | 🇪🇸 Español | 95.4% | [Undertale-Spanish (UTES) v1.1](https://undertale-spanish.com/) |
+| 🇫🇷 Français | 95.7% | [undertale-fr.com](https://undertale-fr.com/) v1.8 Steam |
 | 🇮🇹 Italiano | 94.9% | [Undertale Spaghetti Project (USP)](https://undertaleita.net/) |
 | 🇵🇱 Polski | 94.7% | Krzyhau |
 
