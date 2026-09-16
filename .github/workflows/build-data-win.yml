@@ -62,6 +62,10 @@ jobs:
           # new locale/<code>.po is added; unknown codes get a generic
           # English fallback so the release still builds without one.
           INSTRUCTIONS = {
+              "de": ("🇩🇪", "Deutsch",
+                     "lade `data.win` herunter und ersetze `Undertale/data.win` "
+                     "im Spielordner. Sprache im Spiel wechseln: Settings → "
+                     "Language (Pfeiltasten links/rechts)."),
               "pl": ("🇵🇱", "Polski",
                      "pobierz `data.win` i podmień nim `Undertale/data.win` w "
                      "folderze gry. Język wybierz w grze: Settings → Language "
