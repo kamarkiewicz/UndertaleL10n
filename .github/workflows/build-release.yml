@@ -98,7 +98,7 @@ jobs:
           import sys
           from pathlib import Path
           sys.path.insert(0, 'scripts')
-          from validate_po import get_header, parse_po, LOCALE_DIR
+          from validate_po import get_header, LOCALE_DIR
 
           BANNER = "https://upload.wikimedia.org/wikipedia/commons/2/26/Undertale-logo.jpg"
 
@@ -121,87 +121,54 @@ jobs:
                " (inside `UNDERTALE.app/Contents/Resources/`)"),
           ]
 
-          # Per-language flag. Add an entry here whenever a new locale/<code>.po
-          # is added; unknown codes fall back to a generic globe.
+          # Per-language flag, shown as a plain reassuring strip ("your
+          # language is in here") - full credits/coverage live in the
+          # README, not duplicated here. Add an entry whenever a new
+          # locale/<code>.po is added; unknown codes fall back to a globe.
           FLAGS = {"de": "🇩🇪", "fr": "🇫🇷", "it": "🇮🇹", "pl": "🇵🇱", "es": "🇪🇸"}
 
-          # Credits not derivable from the .po's own X-Source header (kept in
-          # sync with the README's "I want to play" table).
-          CREDIT_OVERRIDE = {"pl": "Krzyhau"}
-
-          def credit_for(code, header):
-              if code in CREDIT_OVERRIDE:
-                  return CREDIT_OVERRIDE[code]
-              source = header.get("X-Source", "")
-              name, _, url = source.partition(", ")
-              return f"[{name}]({url})" if url else (name or "—")
-
-          pot_ids = {mid for mid, _, _, _ in parse_po(LOCALE_DIR / "undertale.pot") if mid}
-
-          def coverage_for(po_path):
-              entries = parse_po(po_path)
-              translated = sum(
-                  1 for mid, mstr, fuzzy, _ in entries
-                  if mid in pot_ids and mstr and not fuzzy
-              )
-              return translated / len(pot_ids) if pot_ids else 0
+          lang_flags = ["🇬🇧"] + [
+              FLAGS.get(p.stem, "🌐") for p in sorted(LOCALE_DIR.glob("*.po"))
+          ]
 
           lines = [
-              f'<p align="center"><img src="{BANNER}" width="360" alt="Undertale logo"></p>',
+              f'<p align="center"><img src="{BANNER}" width="320" alt="Undertale logo"></p>',
               '<p align="center"><sub><strong>Localization Project</strong></sub></p>',
               "",
-              "Download the file for your platform, rename it, and drop it into your "
-              "game folder — then switch language in-game via **Settings → Language** "
-              "(left/right arrows).",
+              '<p align="center">' + "&nbsp;&nbsp;".join(lang_flags) + "</p>",
               "",
-              "### Download",
+              "### 📥 Download",
               "",
-              "| Platform | File → rename to | Game version |",
-              "|---|---|---|",
+              "| Platform | File → rename to |",
+              "|---|---|",
           ]
           info_by_asset = {}
           for asset, real_name, label, location in platforms:
-              info = read_info(asset)
-              info_by_asset[asset] = info
-              lines.append(
-                  f"| {label} | `{asset}` → `{real_name}`{location} | `{info['version']}` |"
-              )
+              info_by_asset[asset] = read_info(asset)
+              lines.append(f"| {label} | `{asset}` → `{real_name}`{location} |")
           lines += [
               "",
+              "1. Download the file for **your platform** above",
+              "2. **Rename** it as shown, drop it into your game folder",
+              "3. Launch the game → **Settings → Language** → pick your flag 🏳️",
+              "",
               "<details>",
-              "<summary>Verify your download (SHA-256 of the pristine source each "
-              "build started from)</summary>",
+              "<summary>Game version / SHA-256 (for verifying your download)</summary>",
               "",
           ]
           for asset, real_name, label, location in platforms:
-              lines.append(f"- {label}: `{info_by_asset[asset]['sha256']}`")
+              info = info_by_asset[asset]
+              lines.append(f"- {label}: `{info['version']}`, SHA-256 `{info['sha256']}`")
           lines += [
               "",
               "</details>",
               "",
-              "### Languages",
+              "---",
               "",
-              "| | Language | Coverage | Credit |",
-              "|---|---|---|---|",
-              "| 🇬🇧 | English | built-in | — |",
-          ]
-          po_paths = sorted(LOCALE_DIR.glob("*.po"))
-          for po_path in po_paths:
-              code = po_path.stem
-              header = get_header(po_path)
-              display_name = header["X-Display-Name"].title()
-              flag = FLAGS.get(code, "🌐")
-              lines.append(
-                  f"| {flag} | {display_name} | {coverage_for(po_path):.0%} | "
-                  f"{credit_for(code, header)} |"
-              )
-          lines += [
-              "",
-              "This project stands on the shoulders of giants: the community "
-              "translation teams credited above, and "
+              "Made possible by the community translation teams and "
               "[UndertaleModTool](https://github.com/UnderminersTeam/UndertaleModTool) "
-              "(UnderminersTeam), whose UndertaleModCli/UndertaleModLib make it "
-              "possible to rebuild `data.win` with every language baked in.",
+              "(UnderminersTeam) — full credits and coverage per language in the "
+              "[README](../../blob/main/README.md#i-want-to-play-undertale-translated).",
           ]
 
           print("\n".join(lines))
