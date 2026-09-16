@@ -98,7 +98,12 @@ jobs:
           import sys
           from pathlib import Path
           sys.path.insert(0, 'scripts')
-          from validate_po import get_header, LOCALE_DIR
+          from validate_po import get_header, parse_po, LOCALE_DIR
+
+          BANNER = (
+              "https://raw.githubusercontent.com/kamarkiewicz/UndertaleL10n/"
+              "main/.github/assets/release-banner.png"
+          )
 
           # Each platform build's own pristine source version - see
           # scripts/source_info.csx. Different platforms/storefronts can
@@ -114,8 +119,8 @@ jobs:
               return info
 
           platforms = [
-              ("steam_data.win", "data.win", "Windows (Steam)", ""),
-              ("steam_game.ios", "game.ios", "macOS (Steam)",
+              ("steam_data.win", "data.win", "🪟 Windows (Steam)", ""),
+              ("steam_game.ios", "game.ios", "🍎 macOS (Steam)",
                " (inside `UNDERTALE.app/Contents/Resources/`)"),
           ]
 
@@ -148,24 +153,89 @@ jobs:
                      "izquierda/derecha)."),
           }
 
+          # Credits not derivable from the .po's own X-Source header (kept in
+          # sync with the README's "I want to play" table).
+          CREDIT_OVERRIDE = {"pl": "Krzyhau"}
+
+          def credit_for(code, header):
+              if code in CREDIT_OVERRIDE:
+                  return CREDIT_OVERRIDE[code]
+              source = header.get("X-Source", "")
+              name, _, url = source.partition(", ")
+              return f"[{name}]({url})" if url else (name or "—")
+
+          pot_ids = {mid for mid, _, _, _ in parse_po(LOCALE_DIR / "undertale.pot") if mid}
+
+          def coverage_for(po_path):
+              entries = parse_po(po_path)
+              translated = sum(
+                  1 for mid, mstr, fuzzy, _ in entries
+                  if mid in pot_ids and mstr and not fuzzy
+              )
+              return translated / len(pot_ids) if pot_ids else 0
+
           lines = [
-              "Download the file matching your platform+storefront below, "
-              "and rename it to replace the same-named file in your game "
-              "folder:",
+              f'<p align="center"><img src="{BANNER}" width="760" alt="Undertale battle menu with FIGHT/ACT/ITEM/MERCY translated into Spanish and Italian"></p>',
+              "",
+              "<p align=\"center\"><em>Real in-game buttons - Español and Italiano ship "
+              "redrawn UI art too, not just translated text.</em></p>",
+              "",
+              "## 🌍 Play Undertale in your language",
+              "",
+              "One file, no installer. Pick your platform, download, rename, play.",
+              "",
+              "### 📥 Download",
+              "",
+              "| Platform | File → rename to | Game version |",
+              "|---|---|---|",
           ]
+          info_by_asset = {}
           for asset, real_name, label, location in platforms:
               info = read_info(asset)
+              info_by_asset[asset] = info
               lines.append(
-                  f"- **{label}:** `{asset}` → rename to `{real_name}`{location} "
-                  f"(game version `{info['version']}`, SHA-256 of that source: "
-                  f"`{info['sha256']}`)"
+                  f"| {label} | `{asset}` → `{real_name}`{location} | `{info['version']}` |"
               )
           lines += [
               "",
-              "🇬🇧 **English:** switch language in-game: Settings → Language "
-              "(left/right arrows).",
+              "Back up the original file, drop the renamed download in its place, launch "
+              "the game, then pick your language in **Settings → Language** (left/right "
+              "arrows).",
+              "",
+              "<details>",
+              "<summary>🔒 Verify your download (SHA-256 of the pristine source each "
+              "build started from)</summary>",
+              "",
           ]
-          for po_path in sorted(LOCALE_DIR.glob("*.po")):
+          for asset, real_name, label, location in platforms:
+              lines.append(f"- {label}: `{info_by_asset[asset]['sha256']}`")
+          lines += [
+              "",
+              "</details>",
+              "",
+              "### 🗣️ Languages included",
+              "",
+              "| | Language | Coverage | Credit |",
+              "|---|---|---|---|",
+              "| 🇬🇧 | English | built-in | — |",
+          ]
+          po_paths = sorted(LOCALE_DIR.glob("*.po"))
+          for po_path in po_paths:
+              code = po_path.stem
+              header = get_header(po_path)
+              display_name = header["X-Display-Name"].title()
+              flag = INSTRUCTIONS.get(code, ("🌐",))[0]
+              lines.append(
+                  f"| {flag} | {display_name} | {coverage_for(po_path):.0%} | "
+                  f"{credit_for(code, header)} |"
+              )
+          lines += [
+              "",
+              "<details>",
+              "<summary>📖 Switching instructions, in each language</summary>",
+              "",
+          ]
+          for po_path in po_paths:
               code = po_path.stem
               display_name = get_header(po_path)["X-Display-Name"]
               flag, label, text = INSTRUCTIONS.get(
@@ -175,8 +245,9 @@ jobs:
                    "as described above. Switch language in-game: Settings → "
                    "Language."),
               )
-              lines.append("")
               lines.append(f"{flag} **{label}:** {text}")
+              lines.append("")
+          lines += ["</details>"]
 
           print("\n".join(lines))
           PY
