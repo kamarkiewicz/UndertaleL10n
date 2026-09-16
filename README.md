@@ -12,8 +12,8 @@ Download `data.win` from the [**Multilingual** release](../../releases/tag/multi
 
 | Language | Coverage | Credits |
 | --- | --- | --- |
-| 🇵🇱 Polski | 95.1% | Krzyhau |
-| 🇪🇸 Español | 95.9% | [Undertale-Spanish (UTES) v1.1](https://undertale-spanish.com/) |
+| 🇵🇱 Polski | 94.7% | Krzyhau |
+| 🇪🇸 Español | 95.4% | [Undertale-Spanish (UTES) v1.1](https://undertale-spanish.com/) |
 
 Coverage is against `locale/undertale.pot`, i.e. the text the game's own
 translation system can reach — see "Known limitations" below for text it
@@ -63,14 +63,6 @@ That text isn't in `gml_Script_textdata_en`, so it's not in
 reach it — `scripts/validate_po.py` reports translated entries for such
 text as "stale" (present in the `.po`, absent from the `.pot`) since
 they don't correspond to any translatable key.
-
-`pl.po`/`es.po` both carry translations for a good chunk of this
-(inherited from before this project's architecture switched to the
-game's native multi-language system), but `scripts/build_data.csx`
-currently has no way to apply them — reaching this text would mean
-rewriting the GML at each place it's referenced to call `scr_gettext`
-instead, which hasn't been done. It'll show up in English regardless of
-the selected language until that's tackled.
 
 ## Setup
 

@@ -42938,3 +42938,206 @@ msgstr ""
 msgid "Don't know"
 msgstr ""
 
+msgid "ESPAÑOL"
+msgstr ""
+
+msgid "POLSKI"
+msgstr ""
+
+msgid "beaut"
+msgstr ""
+
+msgid "hot"
+msgstr ""
+
+msgid "sexy"
+msgstr ""
+
+msgid "pretty"
+msgstr ""
+
+msgid "handsome"
+msgstr ""
+
+msgid "gorgeous"
+msgstr ""
+
+msgid "sparkl"
+msgstr ""
+
+msgid "charm"
+msgstr ""
+
+msgid "attract"
+msgstr ""
+
+msgid "cute"
+msgstr ""
+
+msgid "smokin"
+msgstr ""
+
+msgid "elegant"
+msgstr ""
+
+msgid "good look"
+msgstr ""
+
+msgid "goodlook"
+msgstr ""
+
+msgid "good-look"
+msgstr ""
+
+msgid "grace"
+msgstr ""
+
+msgid "comely"
+msgstr ""
+
+msgid "fine"
+msgstr ""
+
+msgid "foxy"
+msgstr ""
+
+msgid "looker"
+msgstr ""
+
+msgid "dreamboat"
+msgstr ""
+
+msgid "stun"
+msgstr ""
+
+msgid "shapely"
+msgstr ""
+
+msgid "ravishing"
+msgstr ""
+
+msgid "allur"
+msgstr ""
+
+msgid "entic"
+msgstr ""
+
+msgid "seduct"
+msgstr ""
+
+msgid "enchant"
+msgstr ""
+
+msgid "appeal"
+msgstr ""
+
+msgid "tantaliz"
+msgstr ""
+
+msgid "adorable"
+msgstr ""
+
+msgid "radiant"
+msgstr ""
+
+msgid "capitvat"
+msgstr ""
+
+msgid "arm"
+msgstr ""
+
+msgid "hair"
+msgstr ""
+
+msgid "personality"
+msgstr ""
+
+msgid "voice"
+msgstr ""
+
+msgid "dancing"
+msgstr ""
+
+msgid "dance"
+msgstr ""
+
+msgid "ugly"
+msgstr ""
+
+msgid "hideous"
+msgstr ""
+
+msgid "repulsive"
+msgstr ""
+
+msgid "unattractive"
+msgstr ""
+
+msgid "look bad"
+msgstr ""
+
+msgid "stupid"
+msgstr ""
+
+msgid "idiot"
+msgstr ""
+
+msgid "jerk"
+msgstr ""
+
+msgid "asshole"
+msgstr ""
+
+msgid "loser"
+msgstr ""
+
+msgid "dumbass"
+msgstr ""
+
+msgid "douche"
+msgstr ""
+
+msgid "creep"
+msgstr ""
+
+msgid "i love you"
+msgstr ""
+
+msgid "i love your"
+msgstr ""
+
+msgid "toby"
+msgstr ""
+
+msgid "fuck"
+msgstr ""
+
+msgid "shit"
+msgstr ""
+
+msgid "cock"
+msgstr ""
+
+msgid "pussy"
+msgstr ""
+
+msgid "penis"
+msgstr ""
+
+msgid "vagina"
+msgstr ""
+
+msgid "anus"
+msgstr ""
+
+msgid "poop"
+msgstr ""
+
+msgid "tity"
+msgstr ""
+
+msgid "titty"
+msgstr ""
+
+msgid "bepis"
+msgstr ""

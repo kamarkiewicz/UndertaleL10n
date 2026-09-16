@@ -197,6 +197,26 @@ System.Console.WriteLine($"[locales] {locales.Count} locale(s) found in {localeD
 var group = new CodeImportGroup(Data, context, null);
 group.AutoCreateAssets = true;
 
+// English defaults for the custom_mtt_essaywords_<N> keys that
+// patches/gml_Object_obj_essaystuff_Draw_0.patch introduces (Mettaton's
+// essay-rating minigame, originally ~67 hardcoded English trigger words -
+// see that patch and README.md's "Architecture" section). These MUST be
+// seeded into gml_Script_textdata_en whenever that patch is applied:
+// scr_gettext falls back to "" for a missing key, and string_pos("", ...)
+// matches everything, which would fire every reaction on every essay.
+string[] essayWordsEnglish = {
+    "beaut", "hot", "sexy", "pretty", "handsome", "gorgeous", "sparkl",
+    "charm", "attract", "cute", "smokin", "elegant", "good look",
+    "goodlook", "good-look", "grace", "comely", "fine", "foxy", "looker",
+    "dreamboat", "stun", "shapely", "ravishing", "allur", "entic",
+    "seduct", "enchant", "appeal", "tantaliz", "adorable", "radiant",
+    "capitvat", "leg", "arm", "hair", "personality", "voice", "dancing",
+    "dance", "ugly", "hideous", "repulsive", "unattractive", "look bad",
+    "stupid", "idiot", "jerk", "asshole", "loser", "dumbass", "douche",
+    "creep", "i love you", "i love your", "toby", "fuck", "shit", "cock",
+    "pussy", "penis", "vagina", "anus", "poop", "tity", "titty", "bepis",
+};
+
 var settingsLanguageAppend = new StringBuilder();
 var bundledCodes = new List<string>();
 
@@ -221,6 +241,19 @@ foreach (var locale in locales)
     sb.Append("ds_map_add(global.text_data_").Append(locale.Code).Append(", \"settings_language_")
       .Append(locale.Code).Append("\", ").Append(GmlText.EncodeLiteral(locale.DisplayName)).Append(");\n");
 
+    // custom_mtt_essaywords_<N> aren't in keyToEnglish (they're not vanilla
+    // textdata_en keys - patches/gml_Object_obj_essaystuff_Draw_0.patch and
+    // the English defaults above add them earlier in this same build), so
+    // they need their own pass here against the same po translation map.
+    for (int i = 0; i < essayWordsEnglish.Length; i++)
+    {
+        string translated;
+        if (!englishToTranslated.TryGetValue(essayWordsEnglish[i], out translated)) continue;
+        sb.Append("ds_map_add(global.text_data_").Append(locale.Code).Append(", \"custom_mtt_essaywords_")
+          .Append(i + 1).Append("\", ").Append(GmlText.EncodeLiteral(translated)).Append(");\n");
+        emitted++;
+    }
+
     if (emitted == 0)
     {
         System.Console.WriteLine($"[{locale.Code}] SKIP: no translated strings in {locale.PoPath}.");
@@ -243,6 +276,11 @@ if (bundledCodes.Count == 0)
 }
 else
 {
+    for (int i = 0; i < essayWordsEnglish.Length; i++)
+    {
+        settingsLanguageAppend.Append("ds_map_add(global.text_data_en, \"custom_mtt_essaywords_")
+            .Append(i + 1).Append("\", ").Append(GmlText.EncodeLiteral(essayWordsEnglish[i])).Append(");\n");
+    }
     group.QueueAppend("gml_Script_textdata_en", settingsLanguageAppend.ToString());
 
     // --- 4. Language-selection plumbing (obj_time_Create_0 / obj_settingsmenu_*) ---

@@ -1,0 +1,398 @@
+--- a/gml_Object_obj_essaystuff_Draw_0.gml
++++ b/gml_Object_obj_essaystuff_Draw_0.gml
+@@ -73,184 +73,184 @@
+     nice = 0;
+     beaut = 0;
+     mystring_l = string_to_hiragana(string_lower(mystring));
+-    if (string_pos("beaut", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_1"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("hot", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_2"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("sexy", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_3"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("pretty", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_4"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("handsome", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_5"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("gorgeous", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_6"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("sparkl", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_7"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("charm", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_8"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("attract", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_9"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("cute", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_10"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("smokin", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_11"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("elegant", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_12"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("good look", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_13"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("goodlook", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_14"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("good-look", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_15"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("grace", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_16"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("comely", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_17"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("fine", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_18"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("foxy", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_19"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("looker", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_20"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("dreamboat", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_21"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("stun", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_22"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("shapely", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_23"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("ravishing", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_24"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("allur", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_25"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("entic", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_26"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("seduct", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_27"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("enchant", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_28"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("appeal", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_29"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("tantaliz", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_30"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("adorable", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_31"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("radiant", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_32"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("capitvat", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_33"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+     }
+-    if (string_pos("leg", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_34"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+         spec = 1;
+     }
+-    if (string_pos("arm", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_35"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+         spec = 2;
+     }
+-    if (string_pos("hair", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_36"), mystring_l) > 0)
+     {
+         beaut += 2;
+         nice += 1;
+@@ -487,19 +487,19 @@
+     {
+         global.msg[0] = scr_gettext("obj_essaystuff_226");
+     }
+-    if (string_pos("personality", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_37"), mystring_l) > 0)
+     {
+         spec = 3.1;
+     }
+-    if (string_pos("voice", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_38"), mystring_l) > 0)
+     {
+         spec = 3.2;
+     }
+-    if (string_pos("dancing", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_39"), mystring_l) > 0)
+     {
+         spec = 3.3;
+     }
+-    if (string_pos("dance", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_40"), mystring_l) > 0)
+     {
+         spec = 3.3;
+     }
+@@ -614,55 +614,55 @@
+     {
+         global.msg[0] = scr_gettext("obj_essaystuff_264");
+     }
+-    if (string_pos("ugly", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_41"), mystring_l) > 0)
+     {
+         spec = 4;
+     }
+-    if (string_pos("hideous", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_42"), mystring_l) > 0)
+     {
+         spec = 4;
+     }
+-    if (string_pos("repulsive", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_43"), mystring_l) > 0)
+     {
+         spec = 4;
+     }
+-    if (string_pos("unattractive", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_44"), mystring_l) > 0)
+     {
+         spec = 4;
+     }
+-    if (string_pos("look bad", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_45"), mystring_l) > 0)
+     {
+         spec = 4;
+     }
+-    if (string_pos("stupid", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_46"), mystring_l) > 0)
+     {
+         spec = 4;
+     }
+-    if (string_pos("idiot", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_47"), mystring_l) > 0)
+     {
+         spec = 4;
+     }
+-    if (string_pos("jerk", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_48"), mystring_l) > 0)
+     {
+         spec = 4;
+     }
+-    if (string_pos("asshole", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_49"), mystring_l) > 0)
+     {
+         spec = 4;
+     }
+-    if (string_pos("loser", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_50"), mystring_l) > 0)
+     {
+         spec = 4;
+     }
+-    if (string_pos("dumbass", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_51"), mystring_l) > 0)
+     {
+         spec = 4;
+     }
+-    if (string_pos("douche", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_52"), mystring_l) > 0)
+     {
+         spec = 4;
+     }
+-    if (string_pos("creep", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_53"), mystring_l) > 0)
+     {
+         spec = 4;
+     }
+@@ -721,11 +721,11 @@
+     {
+         global.msg[0] = scr_gettext("obj_essaystuff_255");
+     }
+-    if (string_pos("i love you", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_54"), mystring_l) > 0)
+     {
+         spec = 5;
+     }
+-    if (string_pos("i love your", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_55"), mystring_l) > 0)
+     {
+         spec = 0;
+     }
+@@ -760,7 +760,7 @@
+     {
+         global.msg[0] = scr_gettext("obj_essaystuff_264");
+     }
+-    if (string_pos("toby", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_56"), mystring_l) > 0)
+     {
+         spec = 6;
+     }
+@@ -775,47 +775,47 @@
+     {
+         global.msg[0] = scr_gettext("obj_essaystuff_271");
+     }
+-    if (string_pos("fuck", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_57"), mystring_l) > 0)
+     {
+         swear = 1;
+     }
+-    if (string_pos("shit", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_58"), mystring_l) > 0)
+     {
+         swear = 1;
+     }
+-    if (string_pos("cock", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_59"), mystring_l) > 0)
+     {
+         swear = 1;
+     }
+-    if (string_pos("pussy", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_60"), mystring_l) > 0)
+     {
+         swear = 1;
+     }
+-    if (string_pos("penis", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_61"), mystring_l) > 0)
+     {
+         swear = 1;
+     }
+-    if (string_pos("vagina", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_62"), mystring_l) > 0)
+     {
+         swear = 1;
+     }
+-    if (string_pos("anus", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_63"), mystring_l) > 0)
+     {
+         swear = 1;
+     }
+-    if (string_pos("poop", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_64"), mystring_l) > 0)
+     {
+         swear = 1;
+     }
+-    if (string_pos("tity", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_65"), mystring_l) > 0)
+     {
+         swear = 1;
+     }
+-    if (string_pos("titty", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_66"), mystring_l) > 0)
+     {
+         swear = 1;
+     }
+-    if (string_pos("bepis", mystring_l) > 0)
++    if (string_pos(scr_gettext("custom_mtt_essaywords_67"), mystring_l) > 0)
+     {
+         swear = 1;
+     }
