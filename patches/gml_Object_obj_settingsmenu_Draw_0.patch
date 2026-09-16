@@ -1,0 +1,37 @@
+--- a/gml_Object_obj_settingsmenu_Draw_0.gml
++++ b/gml_Object_obj_settingsmenu_Draw_0.gml
+@@ -101,17 +101,30 @@
+     }
+     if (menu == 1)
+     {
+-        if ((global.osflavor <= 2 && menu_engage == 1) || keyboard_check_pressed(vk_left) || keyboard_check_pressed(vk_right))
++        if ((global.osflavor <= 2 && menu_engage == 1) || keyboard_check_pressed(vk_left))
+         {
+-            if (global.language == "en")
++            if (lang_choose > 0)
+             {
+-                global.language = "ja";
++                lang_choose--;
+             }
+             else
+             {
+-                global.language = "en";
++                lang_choose = array_length_1d(lang_list) - 1;
+             }
++            global.language = lang_list[lang_choose];
+         }
++        else if (keyboard_check_pressed(vk_right))
++        {
++            if (lang_choose < (array_length_1d(lang_list) - 1))
++            {
++                lang_choose++;
++            }
++            else
++            {
++                lang_choose = 0;
++            }
++            global.language = lang_list[lang_choose];
++        }
+         menu_engage = 0;
+     }
+     if (menu == 6)

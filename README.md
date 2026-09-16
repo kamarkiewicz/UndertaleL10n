@@ -30,11 +30,15 @@ can't.
   (`gml_Script_textdata_en`, `_ja`, ...), each just thousands of
   `ds_map_add(global.text_data_en, "key", "text");` lines. We compile one
   such script per locale from its `.po` file, add its language code to
-  `global.lang_list`, and patch the Settings menu's language row (a plain
-  EN⇄JA toggle in vanilla) into generic array cycling. See
-  `scripts/lib/GmlText.csx` for exactly how this works, and its header
-  comment for what's *not* built into the base game (the array-cycling
-  menu, notably — that had to be added, not just extended).
+  `global.lang_list`. The rest of the plumbing this needs (Settings menu
+  cycling in place of vanilla's plain EN⇄JA toggle, `scr_gettext`'s own
+  language lookup, which vanilla hardcodes to only ever check `"ja"`) is
+  locale-count-independent, so it's expressed as plain unified diffs in
+  `patches/` and applied via the system `patch` binary rather than
+  hardcoded in `scripts/build_data.csx` — see `patches/README.md`. See
+  `scripts/lib/GmlText.csx` for how GML string literals are read/written,
+  and its header comment for what's *not* built into the base game (the
+  array-cycling menu, notably — that had to be added, not just extended).
 - **The tooling is C#/.NET (`UndertaleModCli` + `UndertaleModLib`)**, both
   for that GML compilation (`UndertaleModLib.Compiler.CodeImportGroup`) and
   because `data.win`'s raw, absolute pointers to strings/assets need
@@ -112,10 +116,12 @@ scripts/                  Our tooling.
   lib/GmlText.csx           Reads/writes GML string literals as they appear in the game's
                             gml_Script_textdata_<lang> scripts (quote-style switching,
                             + concatenation - GML can't escape its own delimiter quote).
+  lib/GmlPatch.csx          Applies a patches/*.patch unified diff to a decompiled GML string
+                            via the system `patch` binary.
   extract_pot.csx           Decompiles gml_Script_textdata_en into a .pot (template) - every
                             real, in-game, user-facing string (not a raw Data.Strings dump).
   build_data.csx            Compiles every locale/<code>.po into the game's own multi-language
-                            system + applies fonts/ (shared). See "Architecture" above.
+                            system + applies fonts/ and patches/. See "Architecture" above.
   check_fonts.csx           Diagnostics: which characters are missing from which font.
   validate_po.py            Sanity-checks every locale/<code>.po against undertale.pot (dupes,
                             broken fuzzy entries, missing X-Display-Name header). Run manually
@@ -126,6 +132,10 @@ locale/                   See locale/README.md.
                             English, empty msgstr.
   <code>.po                 One file per language (e.g. pl.po, es.po). <code> is used directly
                             as the in-game language code - see "Adding a new language" below.
+
+patches/                  Locale-count-independent GML changes (Settings menu cycling,
+                          scr_gettext's language lookup), as unified diffs applied by
+                          build_data.csx. See patches/README.md.
 
 fonts/                    Font sheets (PNG + CSV) with an extended character set,
                           shared by ALL locales (not just pl).

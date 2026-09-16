@@ -1,0 +1,15 @@
+--- a/gml_Object_obj_settingsmenu_Create_0.gml
++++ b/gml_Object_obj_settingsmenu_Create_0.gml
+@@ -101,3 +101,12 @@
+     }
+ }
+ finish = 0;
++lang_list = global.lang_list;
++lang_choose = 0;
++for (var i = 0; i < array_length_1d(lang_list); i++)
++{
++    if (global.language == lang_list[i])
++    {
++        lang_choose = i;
++    }
++}

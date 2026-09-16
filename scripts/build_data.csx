@@ -23,6 +23,13 @@
 // no separate registry needed. The Settings menu label comes from the
 // po's own "X-Display-Name" header (e.g. "Polski", "Español").
 //
+// The Settings-menu/scr_gettext plumbing above is locale-count-independent,
+// so it lives as plain unified diffs in patches/ (one per code entry,
+// applied via the system `patch` binary - see patches/README.md) instead of
+// being hardcoded here. Only obj_time_Create_0's per-locale lang_list/
+// script_execute lines are inherently dynamic (they depend on which
+// locale/*.po files exist) and stay generated below.
+//
 // Usage:
 //   UndertaleModCli/UndertaleModCli load <pristine_data.win> \
 //     --scripts scripts/build_data.csx -o data.win -f
@@ -32,6 +39,7 @@
 
 #load "lib/PoFile.csx"
 #load "lib/GmlText.csx"
+#load "lib/GmlPatch.csx"
 
 using System;
 using System.Collections.Generic;
@@ -252,90 +260,23 @@ else
     }
     group.QueueAppend("gml_Object_obj_time_Create_0", langListLines.ToString());
 
-    group.QueueAppend("gml_Object_obj_settingsmenu_Create_0",
-        "lang_list = global.lang_list;\n" +
-        "lang_choose = 0;\n" +
-        "for (var i = 0; i < array_length_1d(lang_list); i++)\n" +
-        "{\n" +
-        "    if (global.language == lang_list[i])\n" +
-        "    {\n" +
-        "        lang_choose = i;\n" +
-        "    }\n" +
-        "}\n");
+    // The rest of the plumbing (menu cycling, scr_gettext's language lookup,
+    // seeding lang_choose) doesn't depend on which/how many locales are
+    // bundled, so it's expressed as plain unified diffs in patches/ instead
+    // of hardcoded here - see patches/README.md.
+    string patchesDir = Path.Join(root, "patches");
+    foreach (string patchPath in Directory.GetFiles(patchesDir, "*.patch").OrderBy(p => p))
+    {
+        string entryName = Path.GetFileNameWithoutExtension(patchPath);
+        var code = Data.Code.ByName(entryName);
+        if (code == null)
+            throw new Exception($"{patchPath}: no code entry named '{entryName}' in this data.win.");
 
-    string vanillaToggle =
-        "if (menu == 1)\n" +
-        "{\n" +
-        "    if ((global.osflavor <= 2 && menu_engage == 1) || keyboard_check_pressed(vk_left) || keyboard_check_pressed(vk_right))\n" +
-        "    {\n" +
-        "        if (global.language == \"en\")\n" +
-        "        {\n" +
-        "            global.language = \"ja\";\n" +
-        "        }\n" +
-        "        else\n" +
-        "        {\n" +
-        "            global.language = \"en\";\n" +
-        "        }\n" +
-        "    }\n" +
-        "    menu_engage = 0;\n" +
-        "}";
-    string genericCycling =
-        "if (menu == 1)\n" +
-        "{\n" +
-        "    if ((global.osflavor <= 2 && menu_engage == 1) || keyboard_check_pressed(vk_left))\n" +
-        "    {\n" +
-        "        if (lang_choose > 0)\n" +
-        "        {\n" +
-        "            lang_choose--;\n" +
-        "        }\n" +
-        "        else\n" +
-        "        {\n" +
-        "            lang_choose = array_length_1d(lang_list) - 1;\n" +
-        "        }\n" +
-        "        global.language = lang_list[lang_choose];\n" +
-        "    }\n" +
-        "    else if (keyboard_check_pressed(vk_right))\n" +
-        "    {\n" +
-        "        if (lang_choose < (array_length_1d(lang_list) - 1))\n" +
-        "        {\n" +
-        "            lang_choose++;\n" +
-        "        }\n" +
-        "        else\n" +
-        "        {\n" +
-        "            lang_choose = 0;\n" +
-        "        }\n" +
-        "        global.language = lang_list[lang_choose];\n" +
-        "    }\n" +
-        "    menu_engage = 0;\n" +
-        "}";
-    group.QueueTrimmedLinesFindReplace("gml_Object_obj_settingsmenu_Draw_0", vanillaToggle, genericCycling, true);
-
-    // scr_gettext itself only ever checks global.language == "ja" (hardcoded,
-    // vanilla never had generic lookup either) - without this, every other
-    // bundled language's text_data_<code> map is populated but never read.
-    string vanillaGettextLookup =
-        "if (global.language == \"ja\")\n" +
-        "{\n" +
-        "    var loc_text = ds_map_find_value(global.text_data_ja, text_id);\n" +
-        "    if (!is_undefined(loc_text))\n" +
-        "    {\n" +
-        "        text = loc_text;\n" +
-        "    }\n" +
-        "}";
-    string genericGettextLookup =
-        "if (global.language != \"en\")\n" +
-        "{\n" +
-        "    var loc_map = variable_global_get(\"text_data_\" + global.language);\n" +
-        "    if (!is_undefined(loc_map))\n" +
-        "    {\n" +
-        "        var loc_text = ds_map_find_value(loc_map, text_id);\n" +
-        "        if (!is_undefined(loc_text))\n" +
-        "        {\n" +
-        "            text = loc_text;\n" +
-        "        }\n" +
-        "    }\n" +
-        "}";
-    group.QueueTrimmedLinesFindReplace("gml_Script_scr_gettext", vanillaGettextLookup, genericGettextLookup, true);
+        string original = getText(code, context);
+        string patched = GmlPatch.Apply(patchPath, original);
+        group.QueueReplace(entryName, patched);
+        System.Console.WriteLine($"[patches] Applied {Path.GetFileName(patchPath)} to {entryName}.");
+    }
 }
 
 var result = group.Import(true);

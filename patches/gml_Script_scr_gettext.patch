@@ -1,0 +1,23 @@
+--- a/gml_Script_scr_gettext.gml
++++ b/gml_Script_scr_gettext.gml
+@@ -4,12 +4,16 @@
+ {
+     text = "";
+ }
+-if (global.language == "ja")
++if (global.language != "en")
+ {
+-    var loc_text = ds_map_find_value(global.text_data_ja, text_id);
+-    if (!is_undefined(loc_text))
++    var loc_map = variable_global_get("text_data_" + global.language);
++    if (!is_undefined(loc_map))
+     {
+-        text = loc_text;
++        var loc_text = ds_map_find_value(loc_map, text_id);
++        if (!is_undefined(loc_text))
++        {
++            text = loc_text;
++        }
+     }
+ }
+ for (var i = 1; i <= (string_length(text) - 3); i++)
