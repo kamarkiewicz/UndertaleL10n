@@ -42934,12 +42934,6 @@ msgstr "L'humain"
 msgid "Don't know"
 msgstr "Sais pas"
 
-msgid "ESPAÑOL"
-msgstr ""
-
-msgid "POLSKI"
-msgstr ""
-
 msgid "beaut"
 msgstr ""
 

@@ -43790,26 +43790,6 @@ msgstr "Człowiek"
 msgid "Don't know"
 msgstr "Nie wiem"
 
-#, fuzzy
-msgid "DEUTSCH"
-msgstr "DEUTSCH"
-
-#, fuzzy
-msgid "ESPAÑOL"
-msgstr "ESPAÑOL"
-
-#, fuzzy
-msgid "FRANÇAIS"
-msgstr "FRANÇAIS"
-
-#, fuzzy
-msgid "ITALIANO"
-msgstr "ITALIANO"
-
-#, fuzzy
-msgid "POLSKI"
-msgstr "POLSKI"
-
 msgid "beaut"
 msgstr "piekn"
 

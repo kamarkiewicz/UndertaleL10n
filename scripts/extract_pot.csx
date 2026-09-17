@@ -8,10 +8,11 @@
 //
 // Run against a FRESH scripts/build_data.csx output (build/data_final.win),
 // not a raw pristine file - see locale/README.md's "Generating/updating
-// undertale.pot" section for why: some keys (the essaystuff trigger words,
-// each locale's own settings_language_<code> label) only exist once
-// build_data.csx/patches/*.patch add them, not in any pristine file's own
-// gml_Script_textdata_en.
+// undertale.pot" section for why: some keys (the essaystuff trigger words)
+// only exist once build_data.csx/patches/*.patch add them, not in any
+// pristine file's own gml_Script_textdata_en. (settings_language_<code> is
+// also only present in a fresh build, but is deliberately skipped below -
+// it never goes through po translation, see that check for why.)
 //
 // Usage:
 //   UndertaleModCli/UndertaleModCli load build/steam_data.win \
@@ -53,6 +54,15 @@ pot.Header["POT-Creation-Date"] = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm") +
 
 foreach (var kv in entries)
 {
+    // settings_language_<code> is synthetic (only present because we run
+    // against a fresh build_data.csx output - see the usage note above) and
+    // never goes through po msgid/msgstr translation: build_data.csx always
+    // sources its value straight from that locale's own X-Display-Name
+    // header, both for the locale's own label and for the fallback shown
+    // while browsing the language list in a different active language.
+    // Including it here would invite translating something the build
+    // ignores, so skip it.
+    if (kv.Key.StartsWith("settings_language_")) continue;
     if (!seen.Add(kv.Value)) continue; // dedup: one translation applies to every occurrence
     pot.Entries.Add(new PoEntry { MsgId = kv.Value, MsgStr = "" });
 }

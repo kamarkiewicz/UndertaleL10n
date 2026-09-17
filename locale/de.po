@@ -42934,12 +42934,6 @@ msgstr "Den Menschen"
 msgid "Don't know"
 msgstr "Keine Ahnung"
 
-msgid "ESPAÑOL"
-msgstr ""
-
-msgid "POLSKI"
-msgstr ""
-
 msgid "beaut"
 msgstr ""
 

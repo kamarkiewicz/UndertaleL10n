@@ -42936,21 +42936,6 @@ msgstr ""
 msgid "Don't know"
 msgstr ""
 
-msgid "DEUTSCH"
-msgstr ""
-
-msgid "ESPAÑOL"
-msgstr ""
-
-msgid "FRANÇAIS"
-msgstr ""
-
-msgid "ITALIANO"
-msgstr ""
-
-msgid "POLSKI"
-msgstr ""
-
 msgid "beaut"
 msgstr ""
 
