@@ -16,7 +16,7 @@ Download `data.win` from the [**Multilingual** release](../../releases/tag/multi
 | 🇪🇸 Español | 95.4% | [Undertale-Spanish (UTES) v1.1](https://undertale-spanish.com/) |
 | 🇫🇷 Français | 95.7% | [undertale-fr.com](https://undertale-fr.com/) v1.8 Steam |
 | 🇮🇹 Italiano | 94.9% | [Undertale Spaghetti Project (USP)](https://undertaleita.net/) |
-| 🇵🇱 Polski | 94.7% | Krzyhau |
+| 🇵🇱 Polski | 100% | Krzyhau |
 
 Coverage is against `locale/undertale.pot`, i.e. the text the game's own
 translation system can reach — see "Known limitations" below for text it
