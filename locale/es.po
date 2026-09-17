@@ -41404,6 +41404,12 @@ msgstr "ESCASEZ HISTÓRICA DE CABECERAS DE NOTICIA  ||  "
 msgid "120 SECONDS LEFT! DEFUSE 6 BOMBS!"
 msgstr "¡FALTAN 120 SEGUNDOS! ¡DESACTIVA 6 BOMBAS!"
 
+msgid "\\[1] SECONDS LEFT!"
+msgstr "\\[1] SEGUNDOS RESTANTES"
+
+msgid " \\[1] BOMBS LEFT!"
+msgstr " \\[1] BOMBAS RESTANTES"
+
 msgid " HURRY UP!"
 msgstr " ¡DATE PRISA!"
 
@@ -42931,189 +42937,6 @@ msgstr "El humano"
 msgid "Don't know"
 msgstr "No lo sé"
 
-msgid "LV  "
-msgstr "NV  "
-
-msgid "LV"
-msgstr "NV "
-
-msgid "HP"
-msgstr "PS  "
-
-msgid "G"
-msgstr "OR"
-
-msgid "   LV "
-msgstr "   NV "
-
-msgid "LV "
-msgstr "NV "
-
-msgid "DATE POWER"
-msgstr "PODER PAREJA"
-
-msgid "FRIENDSHIP"
-msgstr "AMISTAD"
-
-msgid "Floweytale"
-msgstr ""
-
-msgid "UNDERTALE the Musical"
-msgstr "UNDERTALE el Musical"
-
-msgid "UNDERTALE"
-msgstr ""
-
-msgid "aaaaaa"
-msgstr ""
-
-msgid "asgore"
-msgstr ""
-
-msgid "toriel"
-msgstr ""
-
-msgid "sans"
-msgstr ""
-
-msgid "undyne"
-msgstr ""
-
-msgid "flowey"
-msgstr ""
-
-msgid "chara"
-msgstr ""
-
-msgid "alphys"
-msgstr ""
-
-msgid "alphy"
-msgstr ""
-
-msgid "papyru"
-msgstr ""
-
-msgid "napsta"
-msgstr ""
-
-msgid "blooky"
-msgstr ""
-
-msgid "murder"
-msgstr ""
-
-msgid "mercy"
-msgstr ""
-
-msgid "asriel"
-msgstr ""
-
-msgid "catty"
-msgstr ""
-
-msgid "bratty"
-msgstr ""
-
-msgid "mtt"
-msgstr ""
-
-msgid "metta"
-msgstr ""
-
-msgid "mett"
-msgstr ""
-
-msgid "gerson"
-msgstr ""
-
-msgid "shyren"
-msgstr ""
-
-msgid "aaron"
-msgstr ""
-
-msgid "temmie"
-msgstr ""
-
-msgid "woshua"
-msgstr ""
-
-msgid "jerry"
-msgstr ""
-
-msgid "bpants"
-msgstr ""
-
-msgid "gaster"
-msgstr ""
-
-msgid "Not very creative...?"
-msgstr "¿No eres muy creativo...?"
-
-msgid "You cannot."
-msgstr "No puedes."
-
-msgid "I think you should#think of your own#name, my child."
-msgstr "Creo que deberías#pensar en tu propio#nombre, mi niño."
-
-msgid "nope."
-msgstr ""
-
-msgid "Get your OWN name!"
-msgstr "¡Consigue tu PROPIO nombre!"
-
-msgid "I already CHOSE#that name."
-msgstr "Yo ya he ELEGIDO#ese nombre."
-
-msgid "The true name."
-msgstr "El nombre verdadero."
-
-msgid "D-don't do that."
-msgstr "N-no hagas eso."
-
-msgid "Uh... OK?"
-msgstr "Eh.... ¿vale?"
-
-msgid "I'LL ALLOW IT!!!!"
-msgstr "¡¡¡¡LO PERMITO!!!!"
-
-msgid "...........#(They're powerless to#stop you.)"
-msgstr "............#(No tiene el poder#de detenerte.)"
-
-msgid "That's a little on-#the nose, isn't it...?"
-msgstr "Eso es un poco#demasiado#exacto, ¿no...?"
-
-msgid "Bratty! Bratty!#That's MY name!"
-msgstr "¡Bratty! ¡Bratty!#¡Ese es MI nombre!"
-
-msgid "Like, OK I guess."
-msgstr "O sea, vale, supongo."
-
-msgid "OOOOH!!! ARE YOU#PROMOTING MY BRAND?"
-msgstr "¡¡¡OOOOH!!! ¿ESTÁS#PROMOCIONANDO MI MARCA?"
-
-msgid "Wah ha ha! Why not?"
-msgstr "¡Jua, ja, ja!#¿Por qué no?"
-
-msgid "...?"
-msgstr "¿...?"
-
-msgid "Is this name correct? ; )"
-msgstr "¿Es correcto este nombre? ; )"
-
-msgid "hOI!"
-msgstr "oLI!"
-
-msgid "Clean name."
-msgstr "Nombre limpio."
-
-msgid "Jerry."
-msgstr ""
-
-msgid "You are really scraping the#bottom of the barrel."
-msgstr "De verdad estás#apurando las sobras"
-
 msgid "beaut"
 msgstr "bell"
 
@@ -43311,16 +43134,3 @@ msgstr "tetorras"
 
 msgid "bepis"
 msgstr "puta"
-
-msgid "\\[1] SECONDS LEFT!"
-msgstr "\\[1] SEGUNDOS RESTANTES"
-
-msgid " \\[1] BOMBS LEFT!"
-msgstr " \\[1] BOMBAS RESTANTES"
-
-msgid "\\[1] SECOND LEFT!"
-msgstr "\\[1] SEGUNDO RESTANTE"
-
-msgid " \\[1] BOMB LEFT!"
-msgstr " \\[1] BOMBA RESTANTE"
-
