@@ -10,17 +10,39 @@ in a single `data.win`, selectable at runtime from Settings → Language.
 Download `data.win` from the [**Multilingual** release](../../releases/tag/multilingual)
 (install instructions for every language are on the release page).
 
-| Language | Coverage | Credits |
-| --- | --- | --- |
-| 🇩🇪 Deutsch | 96.3% | [gamegladiators.de](https://gamegladiators.de/page/undertale) v1.08 Steam |
-| 🇪🇸 Español | 95.4% | [Undertale-Spanish (UTES) v1.1](https://undertale-spanish.com/) |
-| 🇫🇷 Français | 95.7% | [undertale-fr.com](https://undertale-fr.com/) v1.8 Steam |
-| 🇮🇹 Italiano | 94.9% | [Undertale Spaghetti Project (USP)](https://undertaleita.net/) |
-| 🇵🇱 Polski | 100% | Krzyhau |
+| Language | Text | Sprites | Sounds | Credits |
+| --- | --- | --- | --- | --- |
+| 🇩🇪 Deutsch | 96.3% | — | — | [gamegladiators.de](https://gamegladiators.de/page/undertale) v1.08 Steam |
+| 🇪🇸 Español | 95.2% | 26 | — | [Undertale-Spanish (UTES) v1.1](https://undertale-spanish.com/) |
+| 🇫🇷 Français | 96.1% | — | — | [undertale-fr.com](https://undertale-fr.com/) v1.8 Steam |
+| 🇮🇹 Italiano | 94.9% | 64 | 1 | [Undertale Spaghetti Project (USP)](https://undertaleita.net/) |
+| 🇵🇱 Polski | 100% | — | — | Krzyhau |
 
-Coverage is against `locale/undertale.pot`, i.e. the text the game's own
-translation system can reach — see "Known limitations" below for text it
-can't.
+These are three separate translatable surfaces, each reachable through its
+own mechanism, so they're reported separately rather than blended into one
+number:
+
+- **Text** — `locale/<code>.po` against `locale/undertale.pot`, i.e. the
+  text `scr_gettext` can reach. This is the only column with a fixed,
+  well-defined denominator (every string in the current `.pot`), so it's
+  the only one shown as a percentage — see "Known limitations" below for
+  text it can't reach at all.
+- **Sprites** — UI graphics with text baked into the pixels (buttons,
+  signs, minigame images), reachable through `scr_getsprite()`. There's no
+  fixed total to divide by: the mechanism (`patches/gml_Script_scr_getsprite.patch`)
+  is a generic `asset_get_index(base_name + "_" + code)` lookup covering
+  *any* sprite drawn that way, not a fixed vanilla list - see
+  `sprites/README.md`'s "Current coverage" for what each count actually
+  includes.
+- **Sounds** — embedded voice lines/sound effects that don't go through
+  `scr_gettext` at all (e.g. Flowey's "wonderful idea" line). Each one
+  needs its own dedicated patch at its own call site (no shared lookup
+  function like sprites have), so the count is just how many exist so far
+  project-wide - see `sounds/README.md`.
+
+A language at 100% text coverage (Polski) can still show `—` for sprites/
+sounds - those need separate source material (translated artwork/audio) on
+top of the text, not just more `.po` entries.
 
 ## Architecture
 
