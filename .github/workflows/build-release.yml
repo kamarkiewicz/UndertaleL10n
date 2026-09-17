@@ -133,9 +133,10 @@ jobs:
 
           lines = [
               f'<p align="center"><img src="{BANNER}" width="320" alt="Undertale logo"></p>',
-              '<p align="center"><sub><strong>Localization Project</strong></sub></p>',
               "",
-              '<p align="center">' + "&nbsp;&nbsp;".join(lang_flags) + "</p>",
+              '# <p align="center"><strong>Localization Project</strong></p>',
+              "",
+              '# <p align="center" >' + "&nbsp;&nbsp;".join(lang_flags) + "</p>",
               "",
               "### 📥 Download",
               "",
