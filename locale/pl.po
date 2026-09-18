@@ -10181,7 +10181,7 @@ msgid "* Oh my god..^1.&* Are you hurt?/"
 msgstr "* O mój boże..^1.&* Jesteś ranny?/"
 
 msgid "\\E8* I..^1. I'm so sorry^1,&  I... I gave you&  the wrong order./"
-msgstr "\\E8* W..^1. wybacz mi^1,&  ja... podałam ci&  złą kolejność."
+msgstr "\\E8* W..^1. wybacz mi^1,&  ja... podałam ci&  złą kolejność./"
 
 msgid "\\E6* Everything's going&  to be fine^1, okay?/"
 msgstr "\\E6* Wszystko będzie&  dobrze^1, okej?/"
