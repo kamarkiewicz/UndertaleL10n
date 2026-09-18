@@ -28540,7 +28540,7 @@ msgid "* then she told me&  something strange./"
 msgstr "* po czym powiedziała mi&  coś dziwnego./"
 
 msgid "* \\Tt\"if a human ever&  comes through this&  door.../\""
-msgstr "* \\Tt\"proszę^1, ale to bardzo&  proszę^1, czy mógłbyś&  mi coś obiecać?\"/"
+msgstr "* \\Tt\"proszę^1, ale to bardzo&  proszę^1, czy mógłbyś&  mi coś obiecać?/\""
 
 msgid "* \"... could you please^1,&  please promise&  something?\"/"
 msgstr "* \"jeśli jakiś człowiek&  przejdzie przez&  te drzwi...\"/"
