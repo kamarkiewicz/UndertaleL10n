@@ -18886,7 +18886,7 @@ msgid "* Smells like Mettaton."
 msgstr "* Pachnie jak Mettaton."
 
 msgid "* Mettaton has low HP."
-msgstr "* Mettaton ma mało PŻ/."
+msgstr "* Mettaton ma mało PŻ."
 
 msgid "* METTATON EX - ATK 47 DEF 47&* His weak point is his&  heart-shaped core./^"
 msgstr "* METTATON EX - ATK 47 DEF 47&* Jego słabym punktem jest&  rdzeń w kształcie serca./^"
