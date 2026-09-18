@@ -32609,7 +32609,7 @@ msgid "* You say hello to Temmie./^"
 msgstr "* Przywitałeś się z Temmie./^"
 
 msgid "NO!!!!!&muscles&r.....&NOT CUTE/%%"
-msgstr "NIU!!!!!&bicki so&...NIE&SŁOTKIE"
+msgstr "NIU!!!!!&bicki so&...NIE&SŁOTKIE/%%"
 
 msgid "Ooh, I&have to&disagree&; )/%%"
 msgstr "Ooh, &muszę za-&przeczyć&; )/%%"
